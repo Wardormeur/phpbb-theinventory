@@ -7,18 +7,20 @@
 *
 */
 
-namespace acme\demo\acp;
+namespace wardormeur\theinventory\acp;
 
 class main_info
 {
 	function module()
 	{
 		return array(
-			'filename'	=> '\acme\demo\acp\main_module',
-			'title'		=> 'ACP_DEMO_TITLE',
-			'version'	=> '1.0.0',
+			'filename'	=> '\wardormeur\theinventory\acp\main_module',
+			'title'		=> 'ACP_TI_TITLE',
+			'version'	=> '0.0.1',
 			'modes'		=> array(
-				'settings'	=> array('title' => 'ACP_DEMO', 'auth' => 'ext_acme/demo && acl_a_board', 'cat' => array('ACP_DEMO_TITLE')),
+				'settings'	=> array(
+					'title' => 'ACP_TI', 
+					'cat' => array('ACP_TI_TITLE')),
 			),
 		);
 	}
