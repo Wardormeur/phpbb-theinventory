@@ -1,28 +1,13 @@
-# phpBB 3.1 Extension - Acme Demo
+Extension to enable the creation of products, through service theInventory.net
 
-## Installation
+Extension (may?) be used thourh Lorenzo/nickvergessen gallery to stock image locally ?
+Extnesion should allow to specify the installation type : master-dependent (lite) or slave instance (local) + report to master.
+Extension allows a post to contains the full-spec of the product, OR to link to a product (overview on link over through ajax?)
 
-Clone into phpBB/ext/acme/demo:
 
-    git clone https://github.com/nickvergessen/phpbb-ext-acme-demo.git phpBB/ext/acme/demo
+v0.1 will contains only basic infos.
+v0.2 with slave instance allows caracteristics
+v0.3 with slave instance allows usage of plugin
 
-Go to "ACP" > "Customise" > "Extensions" and enable the "Acme Demo Extension" extension.
-
-## Tests and Continuous Integration
-
-We use Travis-CI as a continous integration server and phpunit for our unit testing. See more information on the [phpBB development wiki](https://wiki.phpbb.com/Unit_Tests).
-To run the tests locally, you need to install phpBB from its Git repository. Afterwards run the following command from the phpBB Git repository's root:
-
-Windows:
-
-    phpBB\vendor\bin\phpunit.bat -c phpBB\ext\acme\demo\phpunit.xml.dist
-
-others:
-
-    phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist
-
-[![Build Status](https://travis-ci.org/nickvergessen/phpbb-ext-acme-demo.png?branch=master)](https://travis-ci.org/nickvergessen/phpbb-ext-acme-demo)
-
-## License
-
-[GPLv2](license.txt)
+Licence should be defined but the idea as it's a relatively service dependant app, try to stay focused on this ext instead of forking it all along :)
+slave code will be open source, master one won't be in the first time

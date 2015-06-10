@@ -7,7 +7,7 @@
 *
 */
 
-namespace acme\demo;
+namespace wardormeur\theinventory;
 
 /**
 * @ignore
