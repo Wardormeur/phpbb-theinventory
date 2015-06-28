@@ -18,12 +18,15 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, array(
-	'DEMO_PAGE'			=> 'Demo',
-	'DEMO_HELLO'		=> 'Hello %s!',
-	'DEMO_GOODBYE'		=> 'Goodbye %s!',
+	'ACP_TI_TITLE'			=> 'TheInventory Module',
+	'ACP_TI'					=> 'Settings',
+	'ACP_TI_SETTING_SAVED'	=> 'Settings have been saved successfully!',
+	'PRODUCT_PAGE'	=> 'Product page',
+	'NEW_PRODUCT'		=> 'Add new product',
+	'BY'				=> 'By',
+	'PRODUCT_SEARCH'	=>	'Search a product',
+	'PRODUCT_NAME'	=>	'Product name',
+	'LINK_TO'			=>	'Use online image',
+	'UPLOAD_FROM'	=> 'Upload local image'
 
-	'ACP_DEMO_TITLE'			=> 'Demo Module',
-	'ACP_DEMO'					=> 'Settings',
-	'ACP_DEMO_GOODBYE'			=> 'Should say goodbye?',
-	'ACP_DEMO_SETTING_SAVED'	=> 'Settings have been saved successfully!',
 ));

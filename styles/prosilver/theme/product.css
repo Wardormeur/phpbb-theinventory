@@ -1,0 +1,25 @@
+/*SEARCH*/
+.products{
+  width: 100%;
+  text-align: center;
+}
+
+.product-block{
+    display:  inline-block;
+    width: 30%;
+    text-align: center;
+}
+/*SHOW*/
+.product-image{
+  float: left;
+  margin-right: 2%;
+}
+/*EDIT*/
+.product-edit input{
+  display: inline;
+  margin-bottom:5px;
+}
+
+.product-edit label{
+  display:block;
+}

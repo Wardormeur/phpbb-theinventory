@@ -1,3 +1,30 @@
-acme_demo_controller:
-    path: /demo/{name}
-    defaults: { _controller: acme.demo.controller:handle }
+wardormeur_theinventory_product:
+    path: /product/details/{name}
+    defaults: { _controller: wardormeur.theinventory.controller:show }
+
+wardormeur_theinventory_removeproduct:
+    path: /product/details/{name}/delete
+    defaults: { _controller: wardormeur.theinventory.controller:remove }
+
+wardormeur_theinventory_editproduct:
+    path: /product/details/{name}/edit
+    defaults: { _controller: wardormeur.theinventory.controller:edit }
+
+wardormeur_theinventory_saveproduct:
+    path: /product/details/{name}/edit
+    defaults: { _controller: wardormeur.theinventory.controller:save }
+    requirements: {_method: POST }
+
+
+wardormeur_theinventory_savenewproduct:
+    path: /product/~new
+    defaults: { _controller: wardormeur.theinventory.controller:add}
+    requirements: {_method: POST }
+
+wardormeur_theinventory_newproduct:
+    path: /product/~new
+    defaults: { _controller: wardormeur.theinventory.controller:edit}
+
+wardormeur_theinventory_productlist:
+    path: /product/
+    defaults: { _controller: wardormeur.theinventory.controller:search}

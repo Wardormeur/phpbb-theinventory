@@ -7,7 +7,7 @@
 *
 */
 
-namespace acme\demo\event;
+namespace wardormeur\theinventory\event;
 
 /**
 * @ignore
@@ -49,7 +49,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
-			'ext_name' => 'acme/demo',
+			'ext_name' => 'wardormeur/theinventory',
 			'lang_set' => 'common',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
@@ -57,8 +57,10 @@ class main_listener implements EventSubscriberInterface
 
 	public function add_page_header_link($event)
 	{
-		$this->template->assign_vars(array(
-			'U_DEMO_PAGE'	=> $this->helper->route('acme_demo_controller', array('name' => 'world')),
-		));
+		$this->template->assign_vars(
+		array(
+			'U_PRODUCT_PAGE'	=> $this->helper->route('wardormeur_theinventory_productlist')
+			)
+		);
 	}
 }

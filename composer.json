@@ -1,17 +1,24 @@
 {
-	"name": "acme/demo",
+	"name": "wardormeur/theinventory",
 	"type": "phpbb-extension",
-	"description": "Acme Demo Extension for phpBB 3.1",
-	"homepage": "https://github.com/nickvergessen/phpbb-ext-acme-demo",
-	"version": "0.1.0",
-	"time": "2013-11-05",
+	"description": "Product management into phpbb",
+	"homepage": "https://github.com/wardormeur/theinventory",
+	"version": "0.0.1",
+	"time": "2015-6-05",
+	"keywords": [
+        "phpbb",
+        "extension",
+        "product",
+        "management",
+        "gear",
+        "stuff"
+    ],
 	"license": "GPL-2.0",
-	"authors": [{
-			"name": "Joas Schilling",
-			"email": "nickvergessen@gmx.de",
-			"homepage": "https://github.com/nickvergessen/",
-			"role": "Lead Developer"
-		}],
+	"authors": [
+		{
+			"name": "Wardormeur"
+		}
+	],
 	"require": {
 		"php": ">=5.3.3"
 	},
@@ -19,7 +26,7 @@
 		"phpbb/epv": "dev-master"
 	},
 	"extra": {
-		"display-name": "Acme Demo Extension",
+		"display-name": "TheInventory",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.1.0-RC2,<3.2.*@dev"
 		}

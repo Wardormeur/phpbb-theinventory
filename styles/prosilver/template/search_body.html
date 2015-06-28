@@ -1,0 +1,37 @@
+<!-- INCLUDE overall_header.html -->
+
+<form>
+  <div class="panel">
+    <div class="inner">
+      <h2>{L_PRODUCT_SEARCH}</h2>
+
+        <select name="brand">
+        <!-- BEGIN option -->
+          <option name="{option.brand_name}"/>{option.brand_name}</option>
+        <!-- END option -->
+        </select>
+        <input type="text" name="name"></input>
+        <input type="submit" name="submit"></input>
+    </div>
+  </div>
+</form>
+<div class="products ">
+  <!-- BEGIN product -->
+<div class="product-block panel">
+  <a href="{product.url}">
+    <img src="{product.image_path}" />
+    <h4>{product.name} </h4>
+    <h5>{L_BY} {product.brand_name}</h5>
+  </a>
+</div>
+<!-- END product -->
+</div>
+<div class="panel">
+  <div class="inner">
+    <h3>{L_NEW_PRODUCT}</h3>
+    <form method="post" action="{U_NEW}">
+      <!-- INCLUDE part/edit.html -->
+  </form>
+  </div>
+</div>
+<!-- INCLUDE overall_footer.html -->

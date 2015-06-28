@@ -1,0 +1,50 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- BEGIN product -->
+
+<div class="panel">
+  <div class="inner">
+    <ul class="post-buttons">
+      <!-- EVENT viewproduct_body_post_buttons_before -->
+      <!-- IF product.U_EDIT or true -->
+        <li>
+          <a href="{product.U_EDIT}" title="{L_EDIT_PRODUCT}" class="button icon-button edit-icon"><span>{L_BUTTON_EDIT}</span></a>
+        </li>
+      <!-- ENDIF -->
+      <!-- IF product.U_DELETE or true -->
+        <li>
+          <a href="{product.U_DELETE}" title="{L_DELETE_PRODUCT}" class="button icon-button delete-icon"><span>{L_DELETE_POST}</span></a>
+        </li>
+      <!-- ENDIF -->
+      <!-- IF product.U_REPORT -->
+        <!-- <li>
+          <a href="{product.U_REPORT}" title="{L_REPORT_POST}" class="button icon-button report-icon"><span>{L_REPORT_POST}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- IF product.U_WARN -->
+        <!-- <li>
+          <a href="{product.U_WARN}" title="{L_WARN_USER}" class="button icon-button warn-icon"><span>{L_WARN_USER}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- IF product.U_INFO -->
+        <!-- <li>
+          <a href="{product.U_INFO}" title="{L_INFORMATION}" class="button icon-button info-icon"><span>{L_INFORMATION}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- IF product.U_QUOTE -->
+        <!-- <li>
+          <a href="{product.U_QUOTE}" title="{L_REPLY_WITH_QUOTE}" class="button icon-button quote-icon"><span>{L_QUOTE}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- EVENT viewproduct_body_post_buttons_before -->
+    </ul>
+    <div class="product-content">
+      <img src = "{product.image}" class="product-image"/>
+      <h2>{product.name}</h2><h3> {L_BY} <a href="{product.U_SEARCH_BRAND}">{product.brand}</a></h3>
+    </div>
+  <!-- BEGIN tags -->
+    <span>{tags.name}</span>
+  <!-- END -->
+  </div>
+<!-- END product -->
+<!-- INCLUDE overall_footer.html -->

@@ -1,13 +1,25 @@
 services:
-    acme.demo.controller:
-        class: acme\demo\controller\main
+    wardormeur.theinventory.product:
+        class: wardormeur\theinventory\product
+        arguments:
+            - @config
+            - @dbal.conn
+            - %core.table_prefix%
+            - %core.php_ext%
+            - %core.root_path%
+    wardormeur.theinventory.controller:
+        class: wardormeur\theinventory\controller\main
         arguments:
             - @config
             - @controller.helper
             - @template
             - @user
-    acme.demo.listener:
-        class: acme\demo\event\main_listener
+            - @wardormeur.theinventory.product
+            - @request
+            - %core.php_ext%
+            - %core.root_path%
+    wardormeur.theinventory.listener:
+        class: wardormeur\theinventory\event\main_listener
         arguments:
             - @controller.helper
             - @template

@@ -19,7 +19,8 @@ class main_info
 			'version'	=> '0.0.1',
 			'modes'		=> array(
 				'settings'	=> array(
-					'title' => 'ACP_TI', 
+					'title' => 'ACP_TI',
+					'auth' => 'ext_wardormeur/theinventory && acl_a_user',
 					'cat' => array('ACP_TI_TITLE')),
 			),
 		);

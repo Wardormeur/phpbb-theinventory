@@ -1,0 +1,24 @@
+  <!-- IF product.local_id -->
+  <input type="hidden" name="local_id" value="{product.local_id}"/>
+  <!-- ENDIF -->
+  <label for="name"><strong>{L_PRODUCT_NAME}</strong></label>
+  <input type="text" name="name" value="{product.name}" placeholder="just a can"></input>
+  <label for="brand">{L_BY}</label>
+  <input type="text" name="brand" value="{product.brand}" placeholder="Coca-cola"></input>
+  <!-- IF $PHPBB_GALERY -->
+  <label for="product_gallery">{L_LINK_TO}</label>
+  <input type="text" name="product_gallery"/>
+  <!-- ELSE -->
+      <label for="image_path">{L_LINK_TO}</label>
+      <input type="text" name="img_path" placeholder="http://..." value="{product.image_path}"/>
+      <!-- IF not product.image_path -->
+      <strong>{L_OR}</strong>
+      <label for="img_file">{L_UPLOAD_FROM}</label>
+      <input type="file" name="img_file" placeholder="myimage.png"/>
+    <!-- ENDIF -->
+  <!-- ENDIF -->
+
+  <!-- BEGIN tags -->
+    <span>{tags.name}</span>
+  <!-- END -->
+  <input type="submit" name="submit" value="{L_SUBMIT}" />
