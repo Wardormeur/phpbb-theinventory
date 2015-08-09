@@ -1,0 +1,9 @@
+/*EDIT*/
+.block-edit input{
+  display: inline;
+  margin-bottom:5px;
+}
+
+.block-edit label{
+  display:block;
+}

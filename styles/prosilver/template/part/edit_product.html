@@ -4,7 +4,11 @@
   <label for="name"><strong>{L_PRODUCT_NAME}</strong></label>
   <input type="text" name="name" value="{product.name}" placeholder="just a can"></input>
   <label for="brand">{L_BY}</label>
-  <input type="text" name="brand" value="{product.brand}" placeholder="Coca-cola"></input>
+  <select name="brand">
+  <!-- BEGIN option -->
+    <option name="{option.name}" <!-- IF option.selected --> selected <!-- ENDIF -->/>{option.name}</option>
+  <!-- END option -->
+  </select>
   <!-- IF $PHPBB_GALERY -->
   <label for="product_gallery">{L_LINK_TO}</label>
   <input type="text" name="product_gallery"/>
@@ -21,4 +25,3 @@
   <!-- BEGIN tags -->
     <span>{tags.name}</span>
   <!-- END -->
-  <input type="submit" name="submit" value="{L_SUBMIT}" />

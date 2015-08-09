@@ -14,12 +14,3 @@
   float: left;
   margin-right: 2%;
 }
-/*EDIT*/
-.product-edit input{
-  display: inline;
-  margin-bottom:5px;
-}
-
-.product-edit label{
-  display:block;
-}

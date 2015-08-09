@@ -22,19 +22,34 @@ class release_0_0_1 extends \phpbb\db\migration\migration
 		return
 			array(
 				'add_tables'    => array(
-    			$this->table_prefix . 'ti_product'        => array(
+					$this->table_prefix . 'ti_product'        => array(
             'COLUMNS'        => array(
               'local_id'                => array('UINT', NULL, 'auto_increment'),
               'product_id'                => array('UINT',0),
               'name'                => array('VCHAR:255', ''),
-              'brand_name'        => array('VCHAR:255', ''),
+              'brand_id'        		=> array('UINT', 0),
             	'image_path'                => array('VCHAR:255', ''),
               ),
               'PRIMARY_KEY'        => 'local_id',
-              'KEYS'                => array(
-                'product_nm'            => array('UNIQUE', 'name'),
+//              'FOREIGN_KEY'				=> array('brand_id','brand_id'),
+							'KEYS'                => array(
+                'product_nm'            => array('INDEX', 'name'),
               ),
             ),
+						$this->table_prefix . 'ti_brand'        => array(
+	            'COLUMNS'        => array(
+								'local_id'				=> array('UINT', NULL, 'auto_increment'),
+								'brand_id'        => array('UINT', 0),
+	            	'name'                => array('VCHAR:255', ''),
+	              'image_path'			=> array('VCHAR:255',''),
+								'description'			=> array('TEXT',''),
+								'url'							=> array('VCHAR:255','')
+								),
+	              'PRIMARY_KEY'        => 'local_id',
+	              'KEYS'                => array(
+	                'brand_nm'            => array('INDEX', 'name'),
+	              ),
+          ),
 		    	$this->table_prefix. 'ti_post_product'	=> array(
 						'COLUMNS'	=> array(
 			    	'local_id'	=> array('UINT',0),
@@ -52,7 +67,8 @@ class release_0_0_1 extends \phpbb\db\migration\migration
 		return array(
 			'drop_tables'	=>array(
 				$this->table_prefix . 'ti_product',
-				$this->table_prefix . 'ti_post_product'
+				$this->table_prefix . 'ti_post_product',
+				$this->table_prefix . 'ti_brand'
 			)
 		);
 

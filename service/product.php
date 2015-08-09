@@ -1,7 +1,7 @@
 <?php
 
 
-namespace wardormeur\theinventory;
+namespace wardormeur\theinventory\service;
 
 
 
@@ -75,14 +75,15 @@ class product{
 		if($this->get_local_id())
 		{
 			//local_id is auto et product-Id is remote, we dont know either of them atm.
-			$sql = "UPDATE {$this->table_prefix}ti_product SET name='".$this->name."',brand_name='".$this->brand."',image_path='".$this->image."' WHERE local_id={$this->get_local_id()}";
+			$sql = "UPDATE {$this->table_prefix}ti_product SET name='".$this->name."',brand_id='".$this->brand->get_local_id()."',image_path='".$this->image."' WHERE local_id={$this->get_local_id()}";
 			$this->db->sql_query($sql);
 
 		}
 		else
 		{
 			//local_id is auto et product-Id is remote, we dont know either of them atm.
-			$sql = "INSERT INTO {$this->table_prefix}ti_product(name,brand_name,image_path) VALUES('".$this->name."','".$this->brand."','".$this->image."')";
+			//brand id is
+			$sql = "INSERT INTO {$this->table_prefix}ti_product(name,brand_id,image_path) VALUES('".$this->name."','".$this->brand->get_local_id()."','".$this->image."')";
 			$this->db->sql_query($sql);
 			//select missing fields ?
 
@@ -99,29 +100,17 @@ class product{
 
 	public function get_product_by_name($name)
 	{
-			$sql = "SELECT name,local_id,product_id, brand_name, image_path FROM {$this->table_prefix}ti_product WHERE LOWER(name) = '$name'";
+			$sql = "SELECT name,local_id,product_id, brand_id, image_path FROM {$this->table_prefix}ti_product WHERE LOWER(name) = LOWER('$name')";
 			$result = $this->db->sql_query($sql);
 			$product = $this->db->sql_fetchrow($result);
 			$this->set_name($product['name']);
-			$this->set_brand($product['brand_name']);
+			$this->set_brand($product['brand_id']);
 			$this->set_image($product['image_path']);
 			$this->product_id = $product['product_id'];
 			$this->local_id = $product['local_id'];
+			return $this;
 	}
 
-	public function get_brands()
-	{
-		$brands = [];
-		$sql = "SELECT DISTINCT brand_name FROM {$this->table_prefix}ti_product";
-		$result = $this->db->sql_query($sql);
-		while($row = $this->db->sql_fetchrow($result))
-		{
-			$brands[] = $row;
-		}
-
-		return $brands;
-
-	}
 
 	public function search_product($name,$brand)
 	{
@@ -129,12 +118,13 @@ class product{
 		$search_params = [];
 
 		if($name)
-			 $search_params['name'] = "$name";
+			 $search_params['p.name'] = "$name";
 		if($brand)
-				$search_params['brand_name'] = "$brand";
+				$search_params['b.name'] = "$brand";
 
 
-		$sql = "SELECT name,local_id,product_id, brand_name, image_path FROM {$this->table_prefix}ti_product";
+		$sql = "SELECT p.name,p.local_id, p.image_path,p.brand_id FROM {$this->table_prefix}ti_product p
+		INNER JOIN {$this->table_prefix}ti_brand b on p.brand_id = b.local_id";
 		if(!empty($search_params))
 		{
 			$sql .= " WHERE ".$this->db->sql_build_array('SELECT', $search_params);

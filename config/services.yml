@@ -1,20 +1,52 @@
 services:
-    wardormeur.theinventory.product:
-        class: wardormeur\theinventory\product
+    wardormeur.theinventory.service.brand:
+        class: wardormeur\theinventory\service\brand
         arguments:
             - @config
             - @dbal.conn
             - %core.table_prefix%
             - %core.php_ext%
             - %core.root_path%
-    wardormeur.theinventory.controller:
+    wardormeur.theinventory.service.product:
+        class: wardormeur\theinventory\service\product
+        arguments:
+            - @config
+            - @dbal.conn
+            - %core.table_prefix%
+            - %core.php_ext%
+            - %core.root_path%
+    wardormeur.theinventory.controller.product:
+        class: wardormeur\theinventory\controller\product
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @wardormeur.theinventory.service.product
+            - @wardormeur.theinventory.service.brand
+            - @request
+            - %core.php_ext%
+            - %core.root_path%
+    wardormeur.theinventory.controller.brand:
+        class: wardormeur\theinventory\controller\brand
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @wardormeur.theinventory.service.brand
+            - @request
+            - %core.php_ext%
+            - %core.root_path%
+    wardormeur.theinventory.controller.main:
         class: wardormeur\theinventory\controller\main
         arguments:
             - @config
             - @controller.helper
             - @template
             - @user
-            - @wardormeur.theinventory.product
+            - @wardormeur.theinventory.service.product
+            - @wardormeur.theinventory.service.brand
             - @request
             - %core.php_ext%
             - %core.root_path%

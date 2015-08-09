@@ -1,0 +1,58 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- BEGIN brand -->
+
+<div class="panel">
+  <div class="inner">
+    <ul class="post-buttons">
+      <!-- EVENT viewbrand_body_post_buttons_before -->
+      <!-- IF brand.U_EDIT or true -->
+        <li>
+          <a href="{brand.U_EDIT}" title="{L_EDIT_brand}" class="button icon-button edit-icon"><span>{L_BUTTON_EDIT}</span></a>
+        </li>
+      <!-- ENDIF -->
+      <!-- IF brand.U_DELETE or true -->
+        <li>
+          <a href="{brand.U_DELETE}" title="{L_DELETE_brand}" class="button icon-button delete-icon"><span>{L_DELETE_POST}</span></a>
+        </li>
+      <!-- ENDIF -->
+      <!-- IF brand.U_REPORT -->
+        <!-- <li>
+          <a href="{brand.U_REPORT}" title="{L_REPORT_POST}" class="button icon-button report-icon"><span>{L_REPORT_POST}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- IF brand.U_WARN -->
+        <!-- <li>
+          <a href="{brand.U_WARN}" title="{L_WARN_USER}" class="button icon-button warn-icon"><span>{L_WARN_USER}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- IF brand.U_INFO -->
+        <!-- <li>
+          <a href="{brand.U_INFO}" title="{L_INFORMATION}" class="button icon-button info-icon"><span>{L_INFORMATION}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- IF brand.U_QUOTE -->
+        <!-- <li>
+          <a href="{brand.U_QUOTE}" title="{L_REPLY_WITH_QUOTE}" class="button icon-button quote-icon"><span>{L_QUOTE}</span></a>
+        </li> -->
+      <!-- ENDIF -->
+      <!-- EVENT viewbrand_body_post_buttons_before -->
+    </ul>
+    <div class="brand-content">
+      <img src = "{brand.image}" class="brand-image"/>
+      <h2>{brand.name}</h2>
+      <small>{L_BRAND_URL} <a href="{brand.url}">{brand.url}</a></small>
+      <p>{brand.description}</p>
+
+    </div>
+  <!-- BEGIN tags -->
+    <span>{tags.name}</span>
+  <!-- END -->
+
+<!-- BEGIN products -->
+  <span>{products.name}</span>
+<!-- END -->
+
+  </div>
+<!-- END brand -->
+<!-- INCLUDE overall_footer.html -->

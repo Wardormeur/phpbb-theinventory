@@ -1,0 +1,18 @@
+<!-- INCLUDE overall_header.html -->
+<div class="panel">
+  <div class="inner block-edit">
+    <!-- BEGIN brand -->
+    <form method="post" action="{brand.U_EDIT}">
+      <!-- INCLUDE part/edit_brand.html -->
+      <label for="description"> {L_BRAND_DESCRIPTION}</label>
+      <input type="text" name="description" placeholder="{L_BRAND_DESCRIPTION}" value="{brand.description}">
+      </input>
+      <label for="url">{L_BRAND_URL}</label>
+      <input type="text" name="url" placeholder="{L_BRAND_URL}" value="{brand.url}">
+      </input>
+      <input type="submit" name="submit" style="float:right" value="{L_SUBMIT}" />
+    </form>
+    <!-- END brand -->
+  </div>
+</div>
+<!-- INCLUDE overall_footer.html -->

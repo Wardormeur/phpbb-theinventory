@@ -59,7 +59,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		$this->template->assign_vars(
 		array(
-			'U_PRODUCT_PAGE'	=> $this->helper->route('wardormeur_theinventory_productlist')
+			'U_PRODUCT_PAGE'	=> $this->helper->route('wardormeur_theinventory_main')
 			)
 		);
 	}

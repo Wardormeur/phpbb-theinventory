@@ -27,6 +27,11 @@ $lang = array_merge($lang, array(
 	'PRODUCT_SEARCH'	=>	'Search a product',
 	'PRODUCT_NAME'	=>	'Product name',
 	'LINK_TO'			=>	'Use online image',
-	'UPLOAD_FROM'	=> 'Upload local image'
+	'UPLOAD_FROM'	=> 'Upload local image',
+
+	'BRAND_NAME'	=>	'Brand name',
+	'NEW_BRAND'		=> 'Add new brand',
+	'BRAND_DESCRIPTION' => 'Description',
+	'BRAND_URL'	=> 'Brands\'s website'
 
 ));

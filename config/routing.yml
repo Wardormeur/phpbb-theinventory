@@ -1,30 +1,62 @@
 wardormeur_theinventory_product:
     path: /product/details/{name}
-    defaults: { _controller: wardormeur.theinventory.controller:show }
+    defaults: { _controller: wardormeur.theinventory.controller.product:show }
 
 wardormeur_theinventory_removeproduct:
     path: /product/details/{name}/delete
-    defaults: { _controller: wardormeur.theinventory.controller:remove }
-
-wardormeur_theinventory_editproduct:
-    path: /product/details/{name}/edit
-    defaults: { _controller: wardormeur.theinventory.controller:edit }
+    defaults: { _controller: wardormeur.theinventory.controller.product:remove }
 
 wardormeur_theinventory_saveproduct:
     path: /product/details/{name}/edit
-    defaults: { _controller: wardormeur.theinventory.controller:save }
+    defaults: { _controller: wardormeur.theinventory.controller.product:save }
     requirements: {_method: POST }
+
+wardormeur_theinventory_editproduct:
+    path: /product/details/{name}/edit
+    defaults: { _controller: wardormeur.theinventory.controller.product:edit }
 
 
 wardormeur_theinventory_savenewproduct:
     path: /product/~new
-    defaults: { _controller: wardormeur.theinventory.controller:add}
+    defaults: { _controller: wardormeur.theinventory.controller.product:add}
     requirements: {_method: POST }
 
 wardormeur_theinventory_newproduct:
     path: /product/~new
-    defaults: { _controller: wardormeur.theinventory.controller:edit}
+    defaults: { _controller: wardormeur.theinventory.controller.product:edit}
 
-wardormeur_theinventory_productlist:
+
+
+wardormeur_theinventory_brand:
+    path: /brand/details/{name}
+    defaults: { _controller: wardormeur.theinventory.controller.brand:show }
+
+wardormeur_theinventory_removebrand:
+    path: /brand/details/{name}/delete
+    defaults: { _controller: wardormeur.theinventory.controller.brand:remove }
+
+wardormeur_theinventory_savebrand:
+    path: /brand/details/{name}/edit
+    defaults: { _controller: wardormeur.theinventory.controller.brand:save }
+    requirements: {_method: POST }
+    
+wardormeur_theinventory_editbrand:
+    path: /brand/details/{name}/edit
+    defaults: { _controller: wardormeur.theinventory.controller.brand:edit }
+
+
+wardormeur_theinventory_savenewbrand:
+    path: /brand/~new
+    defaults: { _controller: wardormeur.theinventory.controller.brand:add}
+    requirements: {_method: POST }
+
+wardormeur_theinventory_newbrand:
+    path: /brand/~new
+    defaults: { _controller: wardormeur.theinventory.controller.brand:edit}
+
+
+
+
+wardormeur_theinventory_main:
     path: /product/
-    defaults: { _controller: wardormeur.theinventory.controller:search}
+    defaults: { _controller: wardormeur.theinventory.controller.main:search}
