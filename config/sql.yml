@@ -1,0 +1,6 @@
+table_prefix:
+  phpbb: phpbb_
+  wordpress: wp_
+table_name:
+  model: model
+  property: property

@@ -5,9 +5,9 @@
     <div class="inner">
       <h2>{L_PRODUCT_SEARCH}</h2>
 
-        <select name="brand">
+        <select name="brand_id">
         <!-- BEGIN option -->
-          <option name="{option.name}" <!-- IF option.selected --> selected <!-- ENDIF -->/>{option.name}</option>
+          <option name="{option.name}" value="{option.local_id}"<!-- IF option.selected --> selected <!-- ENDIF -->/>{option.name}</option>
         <!-- END option -->
         </select>
         <input type="text" name="name"></input>

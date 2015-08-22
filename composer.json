@@ -20,7 +20,8 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.3.3",
+		"crysalead/inflector": "~1.0"
 	},
 	"require-dev": {
 		"phpbb/epv": "dev-master"

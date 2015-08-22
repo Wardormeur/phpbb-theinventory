@@ -1,59 +1,77 @@
 services:
-    wardormeur.theinventory.service.brand:
-        class: wardormeur\theinventory\service\brand
+
+    wardormeur.theinventory.mapper.gen_model_mapper:
+        class: wardormeur\theinventory\mapper\gen_model
         arguments:
-            - @config
+              - @config
+              - @dbal.conn
+              - %core.table_prefix%
+    wardormeur.theinventory.mapper.parent_model_mapper:
+        class: wardormeur\theinventory\mapper\parent_model
+        arguments:
+              - @config
+              - @dbal.conn
+              - %core.table_prefix%
+    wardormeur.theinventory.mapper.property_mapper:
+        class: wardormeur\theinventory\mapper\property
+        arguments:
+              - @config
+              - @dbal.conn
+              - %core.table_prefix%
+
+
+    wardormeur.theinventory.service.parent_model_service:
+        class: wardormeur\theinventory\service\parent_model
+        arguments:
+            - @wardormeur.theinventory.mapper.parent_model_mapper
+            - %core.php_ext%
+            - %core.root_path%
+    wardormeur.theinventory.service.gen_model_service:
+        class: wardormeur\theinventory\service\gen_model
+        arguments:
+            - @wardormeur.theinventory.mapper.gen_model_mapper
+            - %core.php_ext%
+            - %core.root_path%
+    wardormeur.theinventory.service.search:
+        class: wardormeur\theinventory\service\search
+        arguments:
             - @dbal.conn
             - %core.table_prefix%
             - %core.php_ext%
             - %core.root_path%
-    wardormeur.theinventory.service.product:
-        class: wardormeur\theinventory\service\product
+    wardormeur.theinventory.service.bbcode_handler_service:
+        class: wardormeur\theinventory\service\bbcode_handler
         arguments:
-            - @config
-            - @dbal.conn
-            - %core.table_prefix%
             - %core.php_ext%
             - %core.root_path%
+    wardormeur.theinventory.controller.abstract_controller:
+        class: wardormeur\theinventory\controller\abstract_controller
+        abstract: true
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @request
+            - %core.php_ext%
+            - %core.root_path%
+            - @wardormeur.theinventory.service.search
+            - @wardormeur.theinventory.service.gen_model_service
+            - @wardormeur.theinventory.service.parent_model_service
     wardormeur.theinventory.controller.product:
         class: wardormeur\theinventory\controller\product
-        arguments:
-            - @config
-            - @controller.helper
-            - @template
-            - @user
-            - @wardormeur.theinventory.service.product
-            - @wardormeur.theinventory.service.brand
-            - @request
-            - %core.php_ext%
-            - %core.root_path%
+        parent: wardormeur.theinventory.controller.abstract_controller
     wardormeur.theinventory.controller.brand:
         class: wardormeur\theinventory\controller\brand
-        arguments:
-            - @config
-            - @controller.helper
-            - @template
-            - @user
-            - @wardormeur.theinventory.service.brand
-            - @request
-            - %core.php_ext%
-            - %core.root_path%
+        parent: wardormeur.theinventory.controller.abstract_controller
     wardormeur.theinventory.controller.main:
         class: wardormeur\theinventory\controller\main
-        arguments:
-            - @config
-            - @controller.helper
-            - @template
-            - @user
-            - @wardormeur.theinventory.service.product
-            - @wardormeur.theinventory.service.brand
-            - @request
-            - %core.php_ext%
-            - %core.root_path%
+        parent: wardormeur.theinventory.controller.abstract_controller
     wardormeur.theinventory.listener:
         class: wardormeur\theinventory\event\main_listener
         arguments:
             - @controller.helper
             - @template
+            - @wardormeur.theinventory.service.bbcode_handler_service
         tags:
             - { name: event.listener }

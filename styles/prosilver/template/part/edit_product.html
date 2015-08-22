@@ -4,9 +4,9 @@
   <label for="name"><strong>{L_PRODUCT_NAME}</strong></label>
   <input type="text" name="name" value="{product.name}" placeholder="just a can"></input>
   <label for="brand">{L_BY}</label>
-  <select name="brand">
+  <select name="brand_id">
   <!-- BEGIN option -->
-    <option name="{option.name}" <!-- IF option.selected --> selected <!-- ENDIF -->/>{option.name}</option>
+    <option name="{option.name}" value="{option.local_id}"<!-- IF option.selected --> selected <!-- ENDIF -->/>{option.name}</option>
   <!-- END option -->
   </select>
   <!-- IF $PHPBB_GALERY -->

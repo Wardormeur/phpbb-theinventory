@@ -8,6 +8,8 @@
 */
 
 namespace wardormeur\theinventory;
+require_once __DIR__.'/../model/parent_model.php';
+require_once __DIR__.'/../model/gen_model.php';
 
 /**
 * @ignore
