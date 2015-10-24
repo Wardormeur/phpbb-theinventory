@@ -9,6 +9,9 @@
     width: 30%;
     text-align: center;
 }
+.products .product-block img{
+  max-width: 350px;
+}
 /*SHOW*/
 .product-image{
   float: left;

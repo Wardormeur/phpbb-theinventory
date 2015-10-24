@@ -66,9 +66,9 @@ class release_0_0_1 extends \phpbb\db\migration\migration
 	{
 		return array(
 			'drop_tables'	=>array(
-				$this->table_prefix . 'ti_product',
 				$this->table_prefix . 'ti_post_product',
-				$this->table_prefix . 'ti_brand'
+				$this->table_prefix . 'ti_brand',
+				$this->table_prefix . 'ti_product'
 			)
 		);
 

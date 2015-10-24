@@ -26,16 +26,16 @@ class main_listener implements EventSubscriberInterface
 			'core.page_header'						=> 'add_page_header_link',
 
 			//Credits @vse for ABBBC3.1
-			// functions_content events
-			'core.modify_text_for_display_before'		=> 'parse_bbcodes_before',
-			'core.modify_text_for_display_after'		=> 'parse_bbcodes_after',
-
-			// functions_display events
-			'core.display_custom_bbcodes_modify_row'	=> 'display_bbcodes',
-
-			// message_parser events
-			'core.modify_format_display_text_after'		=> 'parse_bbcodes_after',
-			'core.modify_bbcode_init'					=> 'allow_custom_bbcodes',
+			// // functions_content events
+			// 'core.modify_text_for_display_before'		=> 'parse_bbcodes_before',
+			// 'core.modify_text_for_display_after'		=> 'parse_bbcodes_after',
+			//
+			// // functions_display events
+			// 'core.display_custom_bbcodes_modify_row'	=> 'display_bbcodes',
+			//
+			// // message_parser events
+			// 'core.modify_format_display_text_after'		=> 'parse_bbcodes_after',
+			// 'core.modify_bbcode_init'					=> 'allow_custom_bbcodes',
 		);
 	}
 
@@ -51,7 +51,7 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper	$helper		Controller helper object
 	* @param \phpbb\template			$template	Template object
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \wardormeur\theinventory\service\bbcode_handler $bbcode_handler)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
 	{
 		$this->helper = $helper;
 		$this->template = $template;
@@ -76,45 +76,45 @@ class main_listener implements EventSubscriberInterface
 		);
 	}
 
-	/**
-	 * Alter BBCodes before they are processed by phpBB
-	 *
-	 * This is used to change old/malformed ABBC3 BBCodes to a newer structure
-	 *
-	 * @param object $event The event object
-	 * @return null
-	 * @access public
-	 */
-	public function parse_bbcodes_before($event)
-	{
-		// $event['text'] = $this->bbcodes_handler->pre_parse_bbcodes($event['text'], $event['uid']);
-	}
-
-	/**
-	 * Alter BBCodes after they are processed by phpBB
-	 *
-	 * This is used on ABBC3 BBCodes that require additional post-processing
-	 *
-	 * @param object $event The event object
-	 * @return null
-	 * @access public
-	 */
-	public function parse_bbcodes_after($event)
-	{
-		// $event['text'] = $this->bbcodes_handler->post_parse_bbcodes($event['text']);
-	}
-
-	/**
-	 * Alter custom BBCodes display
-	 *
-	 * @param object $event The event object
-	 * @return null
-	 * @access public
-	 */
-	public function display_bbcodes($event)
-	{
-		// $event['custom_tags'] = $this->bbcodes_handler->display_bbcodes($event['custom_tags'], $event['row']);
-	}
+	// /**
+	//  * Alter BBCodes before they are processed by phpBB
+	//  *
+	//  * This is used to change old/malformed ABBC3 BBCodes to a newer structure
+	//  *
+	//  * @param object $event The event object
+	//  * @return null
+	//  * @access public
+	//  */
+	// public function parse_bbcodes_before($event)
+	// {
+	// 	// $event['text'] = $this->bbcodes_handler->pre_parse_bbcodes($event['text'], $event['uid']);
+	// }
+	//
+	// /**
+	//  * Alter BBCodes after they are processed by phpBB
+	//  *
+	//  * This is used on ABBC3 BBCodes that require additional post-processing
+	//  *
+	//  * @param object $event The event object
+	//  * @return null
+	//  * @access public
+	//  */
+	// public function parse_bbcodes_after($event)
+	// {
+	// 	// $event['text'] = $this->bbcodes_handler->post_parse_bbcodes($event['text']);
+	// }
+	//
+	// /**
+	//  * Alter custom BBCodes display
+	//  *
+	//  * @param object $event The event object
+	//  * @return null
+	//  * @access public
+	//  */
+	// public function display_bbcodes($event)
+	// {
+	// 	// $event['custom_tags'] = $this->bbcodes_handler->display_bbcodes($event['custom_tags'], $event['row']);
+	// }
 
 
 }

@@ -17,7 +17,7 @@ class main extends abstract_controller
   public function search()
   {
 		$this->setExpected(['brand_id','name']);
-		$values = $this->getValues();
+		$values = $this->getSingleValues();
     $brands = $this->parent_model->get();
     //initwith no value
     $this->template->assign_block_vars(

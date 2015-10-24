@@ -15,24 +15,22 @@ include_once 'abstract_controller.php' ;
 class product extends abstract_controller
 {
 
-		// include_once($phpbb_root_path . 'includes/functions_upload.' . $phpEx);
-		// $this->upload = new \fileupload();
-
-
-public function show($name)
+	public function show($name)
 	{
 		if($name) //We have a specific product to display
 		{
 			$products = $this->gen_model->get(['name'=>$name]);
 			$product = $products[0];
-			$brands = $this->parent_model->get(['local_id'=>$product->getBrandId()]);
+			$brands = $this->parent_model->get(['local_id'=>$product->get_brand_id()]);
 			$brand = $brands[0];
-			$this->template->assign_block_vars('product',
+			$img_path = $product->get_image_path();
+			$img = sizeof($img_path)> 1 ? $this->helper->route('wardormeur_theinventory_image_product', array('name'=>$img_path)) : '';
+				$this->template->assign_block_vars('product',
 				array(
 					'name'=> $product->get_name(),
 					'id'=>$product->get_name(),
 					'brand'=> $brand->get_name(),
-					'image'=>$product->getImagePath(),
+					'image'=> $img,
 					'U_NEW' => $this->helper->route('wardormeur_theinventory_newproduct'),
 					'U_EDIT' => $this->helper->route('wardormeur_theinventory_editproduct',array('name'=>$product->get_name())),
 					'U_DELETE' => $this->helper->route('wardormeur_theinventory_removeproduct',array('name'=>$product->get_name())),
@@ -42,7 +40,22 @@ public function show($name)
 					// 'U_QUOTE_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct')
 				)
 			);
+			$this->template->assign_vars(array(
+				'U_FAV_PRODUCT' => $this->helper->route('wardormeur_theinventory_favproduct',array('name'=>$product->get_name())),
+			));
 		}
+
+		$properties = $product->get_properties();
+		if(sizeof($properties)>0){
+			foreach($properties as $property){
+				$display_properties = $property->get_values(['label','value','unit','local_id']);
+				$this->template->assign_block_vars(
+					'product.property', $display_properties
+				);
+			}
+			// var_dump($display_properties);
+		}
+
 
 		return $this->helper->render('product_body.html', $name);
 	}
@@ -54,26 +67,43 @@ public function show($name)
 		{
 			$models = $this->gen_model->get(['name'=>$name]);
 			$model = $models[0];
+			//TODO : check, empty get returns the full list, so what is $brand ?
 			$brands = $this->parent_model->get();
-			$brand = $brands[0];
+			$brand_id = $model->get_local_id();
 			foreach($brands as $l_brand){
 	      $a_brand = $l_brand->get_values(['name','local_id']);
 	      if(!empty($values['brand_id'])){
-	        $a_brand['selected'] = $a_brand['local_id'] == $brand['local_id'] ? true : false;
+	        $a_brand['selected'] = $a_brand['local_id'] ==  $brand_id ? true : false;
 	      }
 	      $this->template->assign_block_vars(
 	        'option', $a_brand
 	      );
 	    }
+
+			$img_path = $model->get_image_path();
+			$img = sizeof($img_path) > 1 ? $this->helper->route('wardormeur_theinventory_image_product', array('name'=>$img_path)) : '';
+
 			$this->template->assign_block_vars('product',
 				array(
 					'name'=> $model->get_name(),
-					'local_id'=>$model->get_name(),
-					'image_path'=>$model->getImagePath(),
+					'local_id'=>$model->get_local_id(),
+					'image_path'=>$img,
 					'U_EDIT' => $this->helper->route('wardormeur_theinventory_saveproduct',array('name'=>$model->get_name())),
 					'U_NEW_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct')
 				)
 			);
+
+			$properties = $model->get_properties();
+			if(sizeof($properties)>0){
+				foreach($properties as $property){
+					$display_properties = $property->get_values(['label','value','unit','local_id']);
+					$this->template->assign_block_vars(
+						'product.property', $display_properties
+					);
+				}
+				// var_dump($display_properties);
+			}
+
 		}
 
 		return $this->helper->render('edit_product_body.html', $name);
@@ -88,9 +118,12 @@ public function show($name)
 
 	public function save($name)
 	{
-		$this->setExpected(['brand_id','img_path','img_file','product_gallery','local_id','name']);
-		$values = $this->getValues();
-
+		$this->setExpected(['brand_id','img_path','img_file','product_gallery','local_id','name',
+				'propertylabel','propertyvalue','propertyunit','propertylocal_id']);
+		$values = $this->getSingleValues();
+		$array_values = $this->getArrayValues();
+		// $values = array_merge($values, $array_values);
+		$values['properties'] = $array_values;
 		$added = $this->gen_model->save($values);
 		if($added)
 		{
@@ -110,6 +143,15 @@ public function show($name)
 
 	}
 
+	public function fav($name){
+		$products = $this->gen_model->get(['name'=>$name]);
+		$product = $products[0];
+		if($this->ownership->get_user_ownings($this->user->data['user_id'], $product->get_local_id())){
+			$this->ownership->toggle_user_own_product($this->user->data['user_id'], $product->get_local_id());
+		}else{
+			$this->ownership->add_user_own_product($this->user->data['user_id'], $product->get_local_id());
+		}
+	}
 
 
 }

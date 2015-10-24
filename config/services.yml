@@ -1,10 +1,17 @@
 services:
 
+    wardormeur.theinventory.mapper.property_mapper:
+        class: wardormeur\theinventory\mapper\property
+        arguments:
+              - @config
+              - @dbal.conn
+              - %core.table_prefix%
     wardormeur.theinventory.mapper.gen_model_mapper:
         class: wardormeur\theinventory\mapper\gen_model
         arguments:
               - @config
               - @dbal.conn
+              - @wardormeur.theinventory.mapper.property_mapper
               - %core.table_prefix%
     wardormeur.theinventory.mapper.parent_model_mapper:
         class: wardormeur\theinventory\mapper\parent_model
@@ -12,8 +19,8 @@ services:
               - @config
               - @dbal.conn
               - %core.table_prefix%
-    wardormeur.theinventory.mapper.property_mapper:
-        class: wardormeur\theinventory\mapper\property
+    wardormeur.theinventory.mapper.product_ownership_mapper:
+        class: wardormeur\theinventory\mapper\ownership
         arguments:
               - @config
               - @dbal.conn
@@ -39,11 +46,12 @@ services:
             - %core.table_prefix%
             - %core.php_ext%
             - %core.root_path%
-    wardormeur.theinventory.service.bbcode_handler_service:
-        class: wardormeur\theinventory\service\bbcode_handler
+    wardormeur.theinventory.service.ownership:
+        class: wardormeur\theinventory\service\ownership
         arguments:
             - %core.php_ext%
             - %core.root_path%
+            - @wardormeur.theinventory.mapper.product_ownership_mapper
     wardormeur.theinventory.controller.abstract_controller:
         class: wardormeur\theinventory\controller\abstract_controller
         abstract: true
@@ -58,6 +66,7 @@ services:
             - @wardormeur.theinventory.service.search
             - @wardormeur.theinventory.service.gen_model_service
             - @wardormeur.theinventory.service.parent_model_service
+            - @wardormeur.theinventory.service.ownership
     wardormeur.theinventory.controller.product:
         class: wardormeur\theinventory\controller\product
         parent: wardormeur.theinventory.controller.abstract_controller
@@ -72,6 +81,5 @@ services:
         arguments:
             - @controller.helper
             - @template
-            - @wardormeur.theinventory.service.bbcode_handler_service
         tags:
             - { name: event.listener }

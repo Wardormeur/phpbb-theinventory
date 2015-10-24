@@ -1,0 +1,44 @@
+<!-- IF not $INCLUDED_THEINVENTORY -->
+<script type="text/javascript">
+	// <![CDATA[
+	(function(){
+	  "use strict";
+
+
+	  $(document).ready(function(){
+
+			function attach_property_event(element){
+				$(element).find('button[name="removeLine"]').on('click', function(event){
+					event.preventDefault();
+					event.stopPropagation();
+					$(event.target).closest('li').remove();
+				});
+			}
+
+	    $('ul[name="properties"] li').each(function(index,li){
+	      attach_property_event(li);
+	    });
+
+	    $('button[name="addProperty"]').on('click',function(event){
+				event.preventDefault();
+				/*$('ul[name="property"]').append('<!-- INCLUDE ../../prosilver/template/part/edit_property.html -->');
+				*/
+				$('ul[name="properties"]').append('<li name="{property.local_id}">'
+				  +'<input type="text" name="propertylabel[]" value="{property.label}" placeholder="Size, color, component ..."></input>'
+				  +'<input type="text" name="propertyvalue[]" value="{property.value}" placeholder="86, black, Pentium II ..."></input>'
+				  +'<input type="text" name="propertyunit[]" value="{property.unit}" placeholder="cm, rgb, piece ..."></input>'
+				  +'<button name="removeLine">{L_REMOVE_PROPERTY}</button>'
+				+'</li>');
+	      attach_property_event($('ul[name="properties"] li:last'));
+				return false;
+	    });
+
+	    $('button[name="owned"]').on('click',function(){
+	      $.ajax('{U_FAV_PRODUCT}');
+	    });
+	  });
+	})();
+	// ]]>
+</script>
+    <!-- DEFINE $INCLUDED_THEINVENTORY = true -->
+<!-- ENDIF -->

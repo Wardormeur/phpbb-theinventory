@@ -16,34 +16,38 @@ class parent_model
 		global $phpbb_container;
 
 		$this->phpEx = $phpEx;
-		$this->phpbb_root_path = $phpbb_root_path;
+		$this->phpbb_root_path = $phpbb_container->getParameter('core.root_path');
 		$this->mapper = $mapper;
 	}
 
 	public function save($values)
 	{
-
-		$img_path = $values['img_path'];
-		$img_file = $values['img_file'];
-
-		$upload_dir = 'images/brand/';
+		$upload_dir = 'images/brand';
 		if (!class_exists('fileupload'))
 		 {
 				 include_once($this->phpbb_root_path . 'includes/functions_upload.' . $this->phpEx);
 		 }
-    //Upload file
-    $upload = new \fileupload();
+    $upload = new \fileupload($upload_dir);
     $upload->set_allowed_extensions(array('png', 'svg','jpeg','jpg','gif'));
-    $file = $upload->form_upload('img_file');
-    if (empty($file->filename))
-    {
-			var_dump('sdsd'.$file->filename);
-    }
-    $file->move_file($upload_dir, true);
 
-		if($img_path)
+		if(isset($values['img_file'])){
+	    //Upload file
+	    $file = $upload->form_upload('img_file');
+
+		}
+
+		if(isset($values['img_path']))
 		{
-				$img = $img_path;
+				$file = $upload->remote_upload($values['img_path']);
+
+				// $values['image_path'] = $values['img_path'];
+		}
+		if (empty($file->filename))
+		{
+			var_dump('sdsd'.$file->filename);
+		}else{
+			$file->move_file($upload_dir, true);
+			$values['image_path'] = $file->uploadname;
 		}
 
 		$model = new \wardormeur\theinventory\model\parent_model($values);
@@ -55,7 +59,7 @@ class parent_model
 		{
 			$affected = $this->mapper->insert($model);
 		}
-		
+
 		if($affected > 0){
 			$result = $model;
 		}else{

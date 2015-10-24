@@ -1,3 +1,6 @@
+wardormeur_theinventory_image_product:
+    path: ../images/product/{name}
+
 wardormeur_theinventory_product:
     path: /product/details/{name}
     defaults: { _controller: wardormeur.theinventory.controller.product:show }
@@ -15,6 +18,10 @@ wardormeur_theinventory_editproduct:
     path: /product/details/{name}/edit
     defaults: { _controller: wardormeur.theinventory.controller.product:edit }
 
+wardormeur_theinventory_favproduct:
+    path: /product/details/{name}/fav
+    defaults: { _controller: wardormeur.theinventory.controller.product:fav }
+
 
 wardormeur_theinventory_savenewproduct:
     path: /product/~new
@@ -26,6 +33,8 @@ wardormeur_theinventory_newproduct:
     defaults: { _controller: wardormeur.theinventory.controller.product:edit}
 
 
+wardormeur_theinventory_image_brand:
+    path: ../images/brand/{name}
 
 wardormeur_theinventory_brand:
     path: /brand/details/{name}
@@ -39,7 +48,7 @@ wardormeur_theinventory_savebrand:
     path: /brand/details/{name}/edit
     defaults: { _controller: wardormeur.theinventory.controller.brand:save }
     requirements: {_method: POST }
-    
+
 wardormeur_theinventory_editbrand:
     path: /brand/details/{name}/edit
     defaults: { _controller: wardormeur.theinventory.controller.brand:edit }

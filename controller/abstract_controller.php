@@ -17,7 +17,8 @@ class abstract_controller{
     $phpbb_root_path,
     \wardormeur\theinventory\service\search $search,
 		\wardormeur\theinventory\service\gen_model $gen_model,
-		\wardormeur\theinventory\service\parent_model $parent_model
+		\wardormeur\theinventory\service\parent_model $parent_model,
+		\wardormeur\theinventory\service\ownership $ownership
   ){
     $this->config = $config;
 		$this->helper = $helper;
@@ -29,13 +30,25 @@ class abstract_controller{
     $this->phpbb_root_path = $phpbb_root_path;
 		$this->gen_model = $gen_model;
 		$this->parent_model = $parent_model;
+    $this->ownership = $ownership;
   }
 
 
-  public function getValues(){
+  public function getSingleValues(){
     $values = [];
     foreach($this->request->variable_names() as $name){
       $value =  $this->request->variable($name, '');
+      if($this->isExpected($name) && !empty($value) ){
+        $values[$name] = $value;
+      }
+    }
+    return $values;
+  }
+
+  public function getArrayValues(){
+    $values = [];
+    foreach($this->request->variable_names() as $name){
+      $value =  $this->request->variable($name, array(''));
       if($this->isExpected($name) && !empty($value) ){
         $values[$name] = $value;
       }

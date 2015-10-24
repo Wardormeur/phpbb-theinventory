@@ -14,6 +14,8 @@ class parent_model extends abstract_model{
 
   public static $fields = ['name','image_path','description','url'];//,'Data'];
   public static $p_fields	= ['local_id','brand_id'];
+  static public $d_fields = [];
+
 
     /**
      * Get the value of Name

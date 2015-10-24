@@ -5,6 +5,16 @@
     <form method="post" action="{product.U_EDIT}">
       <!-- INCLUDE part/edit_product.html -->
 
+
+
+        <ul name="properties">
+        <!-- BEGIN property -->
+          <!-- INCLUDE part/edit_property.html -->
+        <!-- END property -->
+        </ul>
+        <button name="addProperty">{L_ADD_PROPERTY}</button>
+
+
     <input type="submit" name="submit" style="float:right" value="{L_SUBMIT}" />
     </form>
     <!-- END product -->

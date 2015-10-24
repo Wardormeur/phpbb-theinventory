@@ -11,10 +11,14 @@ class gen_model extends abstract_model{
 	private $product_id = null;
 	private $brand_id = null;
 	private $image_path = '';
-  private $data;
+  private $properties;
 	//TODO : fix this public thingy
+	//ids
 	static public $p_fields = ['local_id','product_id'];
-	static public $fields = ['name','brand_id','image_path'];//,'Data'];
+	//single-value fields
+	static public $fields = ['name','brand_id','image_path'];//,'properties, as an object is not returned bu get_values'];
+	//dynamic fields
+	static public $d_fields = ['properties'];
 
     /**
      * Get the value of Name
@@ -141,9 +145,9 @@ class gen_model extends abstract_model{
      *
      * @return mixed
      */
-    public function get_data()
+    public function get_properties()
     {
-        return $this->data;
+        return $this->properties;
     }
 
     /**
@@ -153,9 +157,37 @@ class gen_model extends abstract_model{
      *
      * @return self
      */
-    public function set_data($data)
+    public function set_properties($data)
     {
-        $this->data = $data;
+			//TODO:fix this mess.
+				$declaration = \wardormeur\theinventory\model\property::get_p_fields();
+				//From outside;
+				if(array_key_exists('property'.$declaration[0],$data)){
+					for($i=0;$i< sizeof($data['property'.$declaration[0]]); $i++){
+						$initializor = [];
+						foreach ($declaration as $key ) {
+							if(array_key_exists('property'.$key,$data)){
+								$initializor[$key] = $data['property'.$key][$i];
+							}
+						}
+						$initializor['parent_id'] = $this->local_id;
+	      		$this->properties[] = new \wardormeur\theinventory\model\property($initializor);
+					}
+				}
+				//MonkeyPatching, i can't find a proper way to handle this
+				else{
+					for($i=0;$i< sizeof($data); $i++){
+						$initializor = [];
+						foreach ($declaration as $key ) {
+							if( array_key_exists($key,$data[$i]) ){
+								$initializor[$key] = $data[$i][$key];
+							}
+						}
+						$initializor['parent_id'] = $this->local_id;
+	      		$this->properties[] = new \wardormeur\theinventory\model\property($initializor);
+					}
+				}
+
 
         return $this;
     }

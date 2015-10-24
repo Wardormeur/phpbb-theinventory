@@ -16,6 +16,11 @@
           <a href="{product.U_DELETE}" title="{L_DELETE_PRODUCT}" class="button icon-button delete-icon"><span>{L_DELETE_POST}</span></a>
         </li>
       <!-- ENDIF -->
+      <!-- IF product.U_OWN or true -->
+        <li>
+          <button  title="{L_OWN_PRODUCT}" name="owned" class="button icon-button add-icon"><span>{L_FAV_POST}</span></button>
+        </li>
+      <!-- ENDIF -->
       <!-- IF product.U_REPORT -->
         <!-- <li>
           <a href="{product.U_REPORT}" title="{L_REPORT_POST}" class="button icon-button report-icon"><span>{L_REPORT_POST}</span></a>
@@ -41,10 +46,18 @@
     <div class="product-content">
       <img src = "{product.image}" class="product-image"/>
       <h2>{product.name}</h2><h3> {L_BY} <a href="{product.U_SEARCH_BRAND}">{product.brand}</a></h3>
+
+      <ul name="properties">
+        <!-- BEGIN property -->
+          <li name="{property.local_id}">
+            {property.label} : {property.value} {property.unit}
+          </li>
+        <!-- END property -->
+      </ul>
     </div>
   <!-- BEGIN tags -->
     <span>{tags.name}</span>
-  <!-- END -->
+  <!-- END tags -->
   </div>
 <!-- END product -->
 <!-- INCLUDE overall_footer.html -->

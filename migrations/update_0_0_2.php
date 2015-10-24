@@ -1,5 +1,5 @@
-//add ownership
 <?php
+//add ownership
 /**
 *
 * @package phpBB Extension - Acme Demo
@@ -24,14 +24,15 @@ class update_0_0_2 extends \phpbb\db\migration\migration
     return
       array(
         'add_tables'    => array(
-          $this->table_prefix . 'ti_users_ownership'        => array(
+          $this->table_prefix . 'ti_ownership'        => array(
             'COLUMNS'        => array(
               'local_id'                => array('UINT', NULL),
-              'user_id'                 =>  array('UINT',NULL,)
+              'user_id'                 =>  array('UINT',NULL),
+              'status'            => array('VCHAR:32','had')
               ),
               'PRIMARY_KEY'        => array('local_id','user_id'),
               'KEYS'                => array(
-                'product_user'            => array('INDEX', array('local_id','user_id')),
+                'prod_user'            => array('INDEX', array('local_id','user_id')),
               ),
             ),
           ),
@@ -45,8 +46,18 @@ class update_0_0_2 extends \phpbb\db\migration\migration
                 'product_user'            => array('INDEX', array('brand_id','user_id')),
               ),
             ),
-          )
         );
     }
 
+    public function revert_schema()
+    {
+      return array(
+        'drop_tables'	=>array(
+          $this->table_prefix . 'ti_ownership',
+          $this->table_prefix . 'ti_users_sponsorship',
+          // $this->table_prefix . 'ti_property_types'
+        )
+      );
+
+    }
 }

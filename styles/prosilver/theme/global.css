@@ -7,3 +7,7 @@
 .block-edit label{
   display:block;
 }
+
+ul[name="properties"]{
+  list-style: none;
+}
