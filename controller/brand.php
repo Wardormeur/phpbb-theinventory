@@ -28,7 +28,7 @@ public function show($name)
 					'local_id'=>$model->get_local_id(),
 					'description'=>$model->get_description(),
 					'url'=>$model->get_url(),
-					'image'=>$this->helper->route('wardormeur_theinventory_image_brand', array('name'=>$model->get_image_path())),
+					'image'=>$model->get_image_path(),
 					'U_NEW' => $this->helper->route('wardormeur_theinventory_newbrand'),
 					'U_EDIT' => $this->helper->route('wardormeur_theinventory_editbrand',array('name'=>$model->get_name())),
 					'U_DELETE' => $this->helper->route('wardormeur_theinventory_removebrand',array('name'=>$model->get_name())),

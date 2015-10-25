@@ -68,9 +68,9 @@ class parent_model
 		return $result;
 	}
 
-	public function remove()
+	public function remove($parent_id)
 	{
-		$this->mapper->delete();
+		$this->mapper->delete($parent_id);
 	}
 
 	public function get($parameters = [])

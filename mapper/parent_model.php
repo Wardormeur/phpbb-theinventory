@@ -61,7 +61,7 @@ class parent_model{
     }
 
     public function delete($id){
-      $sql = "DELETE FROM {$this->table_prefix}ti_brand WHERE brand_id={$id}";
+      $sql = "DELETE FROM {$this->table_prefix}ti_brand WHERE local_id=$id";
       $this->db->sql_query($sql);
       return (bool) $this->db->sql_affectedrows();
     }
