@@ -17,3 +17,7 @@
   float: left;
   margin-right: 2%;
 }
+
+.have::before{
+  background-position: 0px -20px;
+}

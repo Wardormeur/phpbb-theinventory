@@ -7,12 +7,11 @@ namespace wardormeur\theinventory\service;
 //strangest class of my life
 class ownership{
 
-	private $name;
-	private $local_id;
-	private $product_id;
-	private $brand;
-	private $image;
 
+	private $toggle_own = ["have","had"];
+	private $toggle_want = ["want","wanted"];
+	private $toggle_sell = ["sell","sold"];
+	private $relationships = [];
 
 	public function __construct(
 		$phpEx,
@@ -20,6 +19,8 @@ class ownership{
 		$mapper)
 	{
 		global $phpbb_container;
+
+		$this->relationships = ["have-had" => $this->toggle_own, "want-wanted" => $this->toggle_want, "sell-sold" => $this->toggle_sell];
 
 		$this->phpbb_phpEx = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -43,16 +44,27 @@ Possibe keywords :
 	public function get_user_ownings($id)
 	{
 		$products = $this->mapper->select(['user_id'=>$id]);
+		return $products;
 	}
 
-	public function toggle_user_own_product($user_id, $product_id)
+	public function toggle_user_own_product($user_id, $product_id, $keyword)
 	{
-		$this->mapper->update($user_id,$product_id);
+		//Generic togggler
+		$relations = array_keys($this->relationships);
+		foreach($relations as $relation){
+			if(strpos($relation, $keyword) !== false){
+					break;
+			}
+		}
+		$indexOf = array_search($keyword, array_values($this->relationships[$relation]));
+		//we take the opposite value of the array index
+		$this->mapper->update($user_id, $product_id, $this->relationships[$relation][(int)(!$indexOf)]);
+		return strtoupper($this->relationships[$relation][(int)(!$indexOf)]);
 	}
 	public function add_user_own_product($user_id, $product_id)
 	{
 		$this->mapper->insert($user_id, $product_id,'have');
-
+		return strtoupper('have');
 	}
 	public function used_used_own_product($user_id, $product_id)
 	{

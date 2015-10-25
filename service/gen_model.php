@@ -60,9 +60,9 @@ class gen_model{
 		return $affected;
 	}
 
-	public function remove()
+	public function remove($product_id)
 	{
-		$this->mapper->delete();
+		$this->mapper->delete($product_id);
 	}
 
 	public function get($parameters)

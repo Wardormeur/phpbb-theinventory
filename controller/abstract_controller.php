@@ -18,7 +18,8 @@ class abstract_controller{
     \wardormeur\theinventory\service\search $search,
 		\wardormeur\theinventory\service\gen_model $gen_model,
 		\wardormeur\theinventory\service\parent_model $parent_model,
-		\wardormeur\theinventory\service\ownership $ownership
+		\wardormeur\theinventory\service\ownership $ownership,
+    \wardormeur\theinventory\mapper\user $extuser //shouldnt expose this one here, but w/e
   ){
     $this->config = $config;
 		$this->helper = $helper;
@@ -31,6 +32,7 @@ class abstract_controller{
 		$this->gen_model = $gen_model;
 		$this->parent_model = $parent_model;
     $this->ownership = $ownership;
+    $this->extuser = $extuser;
   }
 
 

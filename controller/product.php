@@ -24,6 +24,7 @@ class product extends abstract_controller
 			$brands = $this->parent_model->get(['local_id'=>$product->get_brand_id()]);
 			$brand = $brands[0];
 			$img_path = $product->get_image_path();
+			$ownership =  $this->ownership->get_user_ownings( $this->user->data['user_id'], $product->get_local_id());
 			$img = sizeof($img_path)> 1 ? $this->helper->route('wardormeur_theinventory_image_product', array('name'=>$img_path)) : '';
 				$this->template->assign_block_vars('product',
 				array(
@@ -35,6 +36,7 @@ class product extends abstract_controller
 					'U_EDIT' => $this->helper->route('wardormeur_theinventory_editproduct',array('name'=>$product->get_name())),
 					'U_DELETE' => $this->helper->route('wardormeur_theinventory_removeproduct',array('name'=>$product->get_name())),
 					'U_SEARCH_BRAND' => $this->helper->route('wardormeur_theinventory_main',array('brand'=>$brand->get_name())),
+					'U_OWN' => $ownership ? ($ownership[0]['status'] == 'have'? true:false):false
 					// 'U_WARN_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct'),
 					// 'U_INFO_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct'),
 					// 'U_QUOTE_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct')
@@ -42,6 +44,7 @@ class product extends abstract_controller
 			);
 			$this->template->assign_vars(array(
 				'U_FAV_PRODUCT' => $this->helper->route('wardormeur_theinventory_favproduct',array('name'=>$product->get_name())),
+				'SESSION_ID' => $this->user->data['session_id']
 			));
 		}
 
@@ -53,7 +56,6 @@ class product extends abstract_controller
 					'product.property', $display_properties
 				);
 			}
-			// var_dump($display_properties);
 		}
 
 
@@ -137,20 +139,26 @@ class product extends abstract_controller
 
 	public function remove($name){
 
-		$product = $this->gen_model->get(['name'=>$name]);
-		$this->gen_model->remove($product->get_name());
+		$products = $this->gen_model->get(['name'=>$name]);
+		$this->gen_model->remove($products[0]->get_local_id());
 		redirect($this->helper->route('wardormeur_theinventory_main'));
 
 	}
-
+	/*Ajax call*/
 	public function fav($name){
+
+		$this->setExpected(['session_id']);
+		$values = $this->getSingleValues();
+		$user_id = $this->extuser->get_by_session($values['session_id']);
 		$products = $this->gen_model->get(['name'=>$name]);
 		$product = $products[0];
-		if($this->ownership->get_user_ownings($this->user->data['user_id'], $product->get_local_id())){
-			$this->ownership->toggle_user_own_product($this->user->data['user_id'], $product->get_local_id());
+		$relationship = $this->ownership->get_user_ownings( $user_id['session_user_id'], $product->get_local_id());
+		if($relationship){
+			$status = $this->ownership->toggle_user_own_product($user_id['session_user_id'], $product->get_local_id(), $relationship[0]['status']);
 		}else{
-			$this->ownership->add_user_own_product($this->user->data['user_id'], $product->get_local_id());
+			$status = $this->ownership->add_user_own_product($user_id['session_user_id'], $product->get_local_id());
 		}
+		return $this->helper->message($status, [], 'OWN_DESC');
 	}
 
 

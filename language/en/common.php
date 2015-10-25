@@ -32,6 +32,9 @@ $lang = array_merge($lang, array(
 	'BRAND_NAME'	=>	'Brand name',
 	'NEW_BRAND'		=> 'Add new brand',
 	'BRAND_DESCRIPTION' => 'Description',
-	'BRAND_URL'	=> 'Brands\'s website'
+	'BRAND_URL'	=> 'Brands\'s website',
+	'HAVE' => 'have',
+	'HAD'=> 'had',
+	'OWN_DESC' => 'Ownership action has been done'
 
 ));

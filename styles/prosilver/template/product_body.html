@@ -16,9 +16,13 @@
           <a href="{product.U_DELETE}" title="{L_DELETE_PRODUCT}" class="button icon-button delete-icon"><span>{L_DELETE_POST}</span></a>
         </li>
       <!-- ENDIF -->
-      <!-- IF product.U_OWN or true -->
+      <!-- IF product.U_OWN == false -->
         <li>
           <button  title="{L_OWN_PRODUCT}" name="owned" class="button icon-button add-icon"><span>{L_FAV_POST}</span></button>
+        </li>
+      <!-- ELSE -->
+        <li>
+          <button  title="{L_OWN_PRODUCT}" name="owned" class="button icon-button add-icon have"><span>{L_FAV_POST}</span></button>
         </li>
       <!-- ENDIF -->
       <!-- IF product.U_REPORT -->

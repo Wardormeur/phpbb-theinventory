@@ -34,7 +34,20 @@
 	    });
 
 	    $('button[name="owned"]').on('click',function(){
-	      $.ajax('{U_FAV_PRODUCT}');
+	      $.ajax({
+					url: '{U_FAV_PRODUCT}',
+					data: { session_id:'{SESSION_ID}'}
+
+				}).done(function(data){
+					var status = data['MESSAGE_TEXT'];
+					//TODO : real toggle
+					if(status==='have'){
+						$('button[name="owned"]').addClass(status.toLowerCase());
+					}else{
+						$('button[name="owned"]').removeClass('have');
+					}
+
+				});
 	    });
 	  });
 	})();

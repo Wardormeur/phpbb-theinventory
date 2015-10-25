@@ -25,7 +25,12 @@ services:
               - @config
               - @dbal.conn
               - %core.table_prefix%
-
+    wardormeur.theinventory.mapper.extuser:
+        class: wardormeur\theinventory\mapper\user
+        arguments:
+              - @config
+              - @dbal.conn
+              - %core.table_prefix%
 
     wardormeur.theinventory.service.parent_model_service:
         class: wardormeur\theinventory\service\parent_model
@@ -67,6 +72,7 @@ services:
             - @wardormeur.theinventory.service.gen_model_service
             - @wardormeur.theinventory.service.parent_model_service
             - @wardormeur.theinventory.service.ownership
+            - @wardormeur.theinventory.mapper.extuser
     wardormeur.theinventory.controller.product:
         class: wardormeur\theinventory\controller\product
         parent: wardormeur.theinventory.controller.abstract_controller
