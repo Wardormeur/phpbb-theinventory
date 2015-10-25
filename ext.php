@@ -25,8 +25,18 @@ class ext extends \phpbb\extension\base
   	public function enable_step($old_state)
   	{
       global $phpbb_root_path;
-  	   mkdir($phpbb_root_path.'/images/brand');
-   	   mkdir($phpbb_root_path.'/images/product');
+
+      $image_bpath = $phpbb_root_path.'/images/brand';
+      $image_ppath = $phpbb_root_path.'/images/product';
+      if(!is_dir($image_ppath)){
+  	   mkdir($image_ppath);
+      }
+      if(!is_dir($image_bpath)){
+   	   mkdir($image_bpath);
+      }
+
+			return parent::enable_step($old_state);
+
   	}
 
   	/**
@@ -36,22 +46,16 @@ class ext extends \phpbb\extension\base
   	*/
   	public function purge_step($old_state)
   	{
-      //TODO : find a cleaner way
-      // global $phpbb_root_path;
-      // $image_bpath = $phpbb_root_path.'/images/brand';
-      // $image_ppath = $phpbb_root_path.'/images/product';
-      // $windows = ['Windows','MINGW32_NT-6.2','WINNT','WIN32'];
-      // if ( in_array(PHP_OS,$windows))
-      // {
-      //   exec("rd /s /q '{$image_bpath}'");
-      //   exec("rd /s /q '{$image_ppath}'");
-      // }
-      // else
-      // {
-      //   exit;
-      //   exec("rm -rf {$image_bpath}");
-      //   exec("rm -rf {$image_ppath}");
-      // }
+      //TODO : loop plz
+      global $phpbb_root_path;
+      $image_ppath = $phpbb_root_path.'/images/product';
+      $image_bpath = $phpbb_root_path.'/images/brand';
+      array_map('unlink', glob("$image_ppath/*.*"));
+      array_map('unlink', glob("$image_bpath/*.*"));
+      rmdir($image_bpath);
+      rmdir($image_ppath);
+
+      return parent::disable_step($old_state);
 
   	}
 
