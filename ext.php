@@ -55,7 +55,7 @@ class ext extends \phpbb\extension\base
       rmdir($image_bpath);
       rmdir($image_ppath);
 
-      return parent::disable_step($old_state);
+      return parent::purge_step($old_state);
 
   	}
 
