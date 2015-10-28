@@ -87,5 +87,6 @@ services:
         arguments:
             - @controller.helper
             - @template
+            - @wardormeur.theinventory.service.ownership
         tags:
             - { name: event.listener }

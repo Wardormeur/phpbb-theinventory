@@ -25,6 +25,9 @@ class main_listener implements EventSubscriberInterface
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.page_header'						=> 'add_page_header_link',
 
+			/*User display*/
+			'core.memberlist_view_profile' => 'get_user_relationships',
+			'core.viewtopic_cache_user_data' => 'get_user_relationships'
 			//Credits @vse for ABBBC3.1
 			// // functions_content events
 			// 'core.modify_text_for_display_before'		=> 'parse_bbcodes_before',
@@ -73,6 +76,14 @@ class main_listener implements EventSubscriberInterface
 		array(
 			'U_PRODUCT_PAGE'	=> $this->helper->route('wardormeur_theinventory_main')
 			)
+		);
+	}
+
+	public function get_user_relationships($event)
+	{
+		$relationship = $this->ownership->get_user_ownings( $event['user_id']);
+		$this->template->assign_block_vars(
+			'products', $relationship
 		);
 	}
 
