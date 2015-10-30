@@ -28,7 +28,7 @@ class ownership {
       }
 
       $sql_array = array(
-          'SELECT'    => 'product_id, user_id, status',
+          'SELECT'    => 'own.local_id, user_id, status',
 
           'FROM'      => array(
               "{$this->table_prefix}ti_ownership"  => 'own',
@@ -39,10 +39,10 @@ class ownership {
                   'FROM'  => array("{$this->table_prefix}ti_product" => 'p'),
                   'ON'    => 'p.local_id = own.local_id',
               ),
-          // 'WHERE'=> $sql_filters
-          ));
+          ),
+          'WHERE'=> $sql_filters
+        );
         $sql = $this->db->sql_build_query('SELECT', $sql_array);
-
         // now run the query...
         $result = $this->db->sql_query($sql);
         return $this->db->sql_fetchrowset($result);
