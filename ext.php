@@ -26,8 +26,8 @@ class ext extends \phpbb\extension\base
   	{
       global $phpbb_root_path;
 
-      $image_bpath = $phpbb_root_path.'/images/brand';
-      $image_ppath = $phpbb_root_path.'/images/product';
+      $image_bpath = $phpbb_root_path.'images/brand';
+      $image_ppath = $phpbb_root_path.'images/product';
       if(!is_dir($image_ppath)){
   	   mkdir($image_ppath);
       }
@@ -48,8 +48,8 @@ class ext extends \phpbb\extension\base
   	{
       //TODO : loop plz
       global $phpbb_root_path;
-      $image_ppath = $phpbb_root_path.'/images/product';
-      $image_bpath = $phpbb_root_path.'/images/brand';
+      $image_ppath = $phpbb_root_path.'images/product';
+      $image_bpath = $phpbb_root_path.'images/brand';
       array_map('unlink', glob("$image_ppath/*.*"));
       array_map('unlink', glob("$image_bpath/*.*"));
       rmdir($image_bpath);
