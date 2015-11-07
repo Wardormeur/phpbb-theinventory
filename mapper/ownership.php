@@ -22,7 +22,6 @@ class ownership {
      * @return [type] [description]
      */
     public function select($filters){
-
       if (sizeof($filters) > 0){
         $sql_filters = $this->db->sql_build_array('SELECT', $filters);
       }

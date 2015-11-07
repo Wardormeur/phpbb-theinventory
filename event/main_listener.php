@@ -27,7 +27,8 @@ class main_listener implements EventSubscriberInterface
 
 			/*User display*/
 			'core.memberlist_view_profile' => 'get_user_relationships',
-			'core.viewtopic_cache_user_data' => 'get_user_relationships'
+			'core.viewtopic_modify_post_row' => 'get_users_relationships',
+			// 'core.viewtopic_cache_user_data' => 'set_users_relationships',
 			//Credits @vse for ABBBC3.1
 			// // functions_content events
 			// 'core.modify_text_for_display_before'		=> 'parse_bbcodes_before',
@@ -54,10 +55,14 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper	$helper		Controller helper object
 	* @param \phpbb\template			$template	Template object
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template,
+	\wardormeur\theinventory\service\ownership $ownership, \wardormeur\theinventory\service\gen_model $product ,\wardormeur\theinventory\service\parent_model $parent_model )
 	{
 		$this->helper = $helper;
 		$this->template = $template;
+		$this->ownership = $ownership;
+		$this->product = $product;
+		$this->parent_model = $parent_model;
 	}
 
 	public function load_language_on_setup($event)
@@ -79,14 +84,44 @@ class main_listener implements EventSubscriberInterface
 		);
 	}
 
-	public function get_user_relationships($event)
-	{
-		$relationship = $this->ownership->get_user_ownings( $event['user_id']);
-		$this->template->assign_block_vars(
-			'products', $relationship
-		);
-	}
+		public function get_user_relationships($event)
+		{
+				$meins = $this->get_ownings($event['member']['user_id']);
 
+				foreach($meins as $mein){
+					$this->template->assign_block_vars(
+						'products', $mein
+					);
+				}
+		}
+
+
+		public function get_users_relationships($event)
+		{
+					$meins = $this->get_ownings($event['row']['user_id']);
+					$event['post_row'] = array_merge($event['post_row'], array(
+						'products' => $meins
+					));
+		}
+
+	private function get_ownings($user_id){
+		$meins = [];
+		$mein = [];
+		$relationship = $this->ownership->get_user_ownings($user_id );
+		foreach ($relationship as $product) {
+			$_products = $this->product->get(['local_id' => $product['local_id']]);
+			$_product = $_products[0];
+			$brands = $this->parent_model->get(['local_id'=>$_product->get_brand_id()]);
+			$brand = $brands[0];
+
+			$mein['name'] = $_product->get_name();
+			$mein['product_url'] = $this->helper->route('wardormeur_theinventory_product', array('name'=>$_product->get_name()));
+			$mein['brand_url'] = $this->helper->route('wardormeur_theinventory_brand', array('name'=>$brand->get_name()));
+			$mein['brand'] = $brand->get_name();
+			$meins[] = $mein;
+		}
+		return $meins;
+	}
 	// /**
 	//  * Alter BBCodes before they are processed by phpBB
 	//  *

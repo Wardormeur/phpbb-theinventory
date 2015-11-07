@@ -20,7 +20,9 @@ class ownership{
 	{
 		global $phpbb_container;
 
-		$this->relationships = ["have-had" => $this->toggle_own, "want-wanted" => $this->toggle_want, "sell-sold" => $this->toggle_sell];
+		$this->relationships = ["have-had" => $this->toggle_own,
+		"want-wanted" => $this->toggle_want,
+		"sell-sold" => $this->toggle_sell];
 
 		$this->phpbb_phpEx = $phpEx;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -41,10 +43,15 @@ Possibe keywords :
 
 
 
-	public function get_user_ownings($id)
+	public function get_user_ownings($params)
 	{
-		$products = $this->mapper->select(['user_id'=>$id]);
+		$products = $this->mapper->select($params);
 		return $products;
+	}
+
+	public function is_user_owning($user_id, $product_id){
+		$products = $this->get_user_ownings(['user_id'=>$user_id,  'p.local_id'=>$product_id]);
+		return sizeof($products) > 0 && $products[0]['status'] == 'have';
 	}
 
 	public function toggle_user_own_product($user_id, $product_id, $keyword)
@@ -61,11 +68,13 @@ Possibe keywords :
 		$this->mapper->update($user_id, $product_id, $this->relationships[$relation][(int)(!$indexOf)]);
 		return strtoupper($this->relationships[$relation][(int)(!$indexOf)]);
 	}
+
 	public function add_user_own_product($user_id, $product_id)
 	{
 		$this->mapper->insert($user_id, $product_id,'have');
 		return strtoupper('have');
 	}
+
 	public function used_used_own_product($user_id, $product_id)
 	{
 		$products = $this->mapper->select(['user_id'=>$user_id,'product_id'=> $product_id,'status'=>'had']);

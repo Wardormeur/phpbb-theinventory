@@ -1,15 +1,19 @@
+<!-- IF postrow.products -->
 <dd class="profile-contact">
       <strong>{L_GEAR}{L_COLON}</strong>
       <div class="dropdown-container dropdown-left">
         <a href="#" class="dropdown-trigger"><span class="imageset icon_contact" title="{postrow.CONTACT_USER}">{postrow.CONTACT_USER}</span></a>
         <div class="dropdown hidden">
           <div class="pointer"><div class="pointer-inner"></div></div>
-        						<div class="dropdown-contents ">
-                      <!--BEGIN products -->
-                      <dt>{products.name}</dt>
-                      <dd>{products.status}</dd>
-                      <!-- END products -->
-                    </div>
+						<div class="dropdown-contents ">
+              <!-- BEGIN postrow.products -->
+              <div>
+                <a href="{postrow.products.brand_url}">{postrow.products.brand}</a>
+                <a href="{postrow.products.product_url}">{postrow.products.name}</a>
+              </div>
+              <!-- END postrow.products -->
+            </div>
         </div>
       </div>
 </dd>
+<!-- ENDIF -->

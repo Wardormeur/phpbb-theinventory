@@ -88,5 +88,7 @@ services:
             - @controller.helper
             - @template
             - @wardormeur.theinventory.service.ownership
+            - @wardormeur.theinventory.service.gen_model_service
+            - @wardormeur.theinventory.service.parent_model_service
         tags:
             - { name: event.listener }

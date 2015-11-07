@@ -24,7 +24,7 @@ class product extends abstract_controller
 			$brands = $this->parent_model->get(['local_id'=>$product->get_brand_id()]);
 			$brand = $brands[0];
 			$img_path = $product->get_image_path();
-			$ownership =  $this->ownership->get_user_ownings( $this->user->data['user_id'], $product->get_local_id());
+			$ownership =  $this->ownership->is_user_owning( $this->user->data['user_id'], $product->get_local_id());
 			$img = sizeof($img_path)> 1 ? $this->helper->route('wardormeur_theinventory_image_product', array('name'=>$img_path)) : '';
 				$this->template->assign_block_vars('product',
 				array(
@@ -36,7 +36,7 @@ class product extends abstract_controller
 					'U_EDIT' => $this->helper->route('wardormeur_theinventory_editproduct',array('name'=>$product->get_name())),
 					'U_DELETE' => $this->helper->route('wardormeur_theinventory_removeproduct',array('name'=>$product->get_name())),
 					'U_SEARCH_BRAND' => $this->helper->route('wardormeur_theinventory_main',array('brand'=>$brand->get_name())),
-					'U_OWN' => $ownership ? ($ownership[0]['status'] == 'have'? true:false):false
+					'U_OWN' => $ownership
 					// 'U_WARN_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct'),
 					// 'U_INFO_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct'),
 					// 'U_QUOTE_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct')
@@ -152,8 +152,9 @@ class product extends abstract_controller
 		$user_id = $this->extuser->get_by_session($values['session_id']);
 		$products = $this->gen_model->get(['name'=>$name]);
 		$product = $products[0];
-		$relationship = $this->ownership->get_user_ownings( $user_id['session_user_id'], $product->get_local_id());
-		if($relationship){
+		$relationship_exists = $this->ownership->is_user_owning( $user_id['session_user_id'], $product->get_local_id());
+		if($relationship_exists){
+			$relationship = $this->ownership->get_user_ownings( ['user_id' =>$user_id['session_user_id'], 'p.local_id' => $product->get_local_id()]);
 			$status = $this->ownership->toggle_user_own_product($user_id['session_user_id'], $product->get_local_id(), $relationship[0]['status']);
 		}else{
 			$status = $this->ownership->add_user_own_product($user_id['session_user_id'], $product->get_local_id());

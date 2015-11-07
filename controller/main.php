@@ -54,6 +54,7 @@ class main extends abstract_controller
 														array('name'=>$brand->get_name())
 													);
 				$product['brand'] = $brand->get_name();
+        var_dump($product);
 	      $this->template->assign_block_vars(
 	        'product'	,	$product
 	      );

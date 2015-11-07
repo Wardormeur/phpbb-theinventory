@@ -1,14 +1,17 @@
 <div class="panel">
   <h3>{L_GEAR}</h3>
-  <dl class="details">
-    <dt>{L_GEAR_STATUS}</dt>
-    <dd>{L_GEAR_NAME}</dd>
 
-    <!--BEGIN products -->
-    <dt>{products.name}</dt>
-    <dd>{products.status}</dd>
-    <!-- END products -->
+  <div class="inner">
+    <dl class="details">
+      <dt><h4>{L_GEAR_BRAND}</h4></dt>
+      <dd><h4>{L_GEAR_NAME}</h4></dd>
+      <!-- BEGIN products -->
 
-  </dl>
+        <dt><a href="{products.brand_url}">{products.brand}</a></dt>
+        <dd><a href="{products.product_url}">{products.name}</a></dd>
+
+      <!-- END products -->
+    </dl>
+  </div>
 
 </div>

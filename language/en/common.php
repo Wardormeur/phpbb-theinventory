@@ -35,6 +35,8 @@ $lang = array_merge($lang, array(
 	'BRAND_URL'	=> 'Brands\'s website',
 	'HAVE' => 'have',
 	'HAD'=> 'had',
-	'OWN_DESC' => 'Ownership action has been done'
-
+	'OWN_DESC' => 'Ownership action has been done',
+	'GEAR' => 'Gear',
+	'GEAR_BRAND' => 'Brand',
+	'GEAR_NAME' => 'Product name'
 ));
