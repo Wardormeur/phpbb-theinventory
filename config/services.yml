@@ -65,6 +65,7 @@ services:
             - @controller.helper
             - @template
             - @user
+            - @auth
             - @request
             - %core.php_ext%
             - %core.root_path%

@@ -22,6 +22,10 @@ class add_permissions extends \phpbb\db\migration\migration
 	{
 
 		return(array(
+			array('permission.add', array('a_ti_create')),
+			array('permission.add', array('m_ti_create')),
+			array('permission.add', array('u_ti_create')),
+
 			array('permission.add', array('a_ti_edit')),
 			array('permission.add', array('m_ti_edit')),
 			array('permission.add', array('u_ti_edit')),
@@ -29,12 +33,31 @@ class add_permissions extends \phpbb\db\migration\migration
   		array('permission.add', array('a_ti_remove')),
 			array('permission.add', array('m_ti_remove')),
 			array('permission.add', array('u_ti_remove')),
+
+			// Set default permissions
+			// Admins
+			array('permission.permission_set', array('ADMINISTRATORS', 'a_ti_create','group')),
+			array('permission.permission_set', array('ADMINISTRATORS', 'a_ti_edit','group')),
+			array('permission.permission_set', array('ADMINISTRATORS', 'a_ti_remove','group')),
+			//Moderators
+			array('permission.permission_set', array('GLOBAL_MODERATORS', 'm_ti_create','group')),
+			array('permission.permission_set', array('GLOBAL_MODERATORS', 'm_ti_edit','group')),
+			array('permission.permission_set', array('GLOBAL_MODERATORS', 'm_ti_remove','group')),
+			// Give REGISTERED users u_new permission
+			array('permission.permission_set', array('REGISTERED', 'u_ti_create','group')),
+			array('permission.permission_set', array('REGISTERED', 'u_ti_edit','group')),
+			array('permission.permission_set', array('REGISTERED', 'u_ti_remove', 'group', false))
 		));
 	}
 
 	public function revert_data()
 	{
 		return(array(
+
+			array('permission.add', array('a_ti_create')),
+			array('permission.add', array('m_ti_create')),
+			array('permission.add', array('u_ti_create')),
+
 			array('permission.remove', array('a_ti_edit')),
 			array('permission.remove', array('m_ti_edit')),
 			array('permission.remove', array('u_ti_edit')),

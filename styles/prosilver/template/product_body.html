@@ -6,24 +6,26 @@
   <div class="inner">
     <ul class="post-buttons">
       <!-- EVENT viewproduct_body_post_buttons_before -->
-      <!-- IF product.U_EDIT or true -->
+      <!-- IF product.U_EDIT -->
         <li>
           <a href="{product.U_EDIT}" title="{L_EDIT_PRODUCT}" class="button icon-button edit-icon"><span>{L_BUTTON_EDIT}</span></a>
         </li>
       <!-- ENDIF -->
-      <!-- IF product.U_DELETE or true -->
+      <!-- IF product.U_DELETE  -->
         <li>
           <a href="{product.U_DELETE}" title="{L_DELETE_PRODUCT}" class="button icon-button delete-icon"><span>{L_DELETE_POST}</span></a>
         </li>
       <!-- ENDIF -->
-      <!-- IF product.U_OWN == false -->
-        <li>
-          <button  title="{L_OWN_PRODUCT}" name="owned" class="button icon-button add-icon"><span>{L_FAV_POST}</span></button>
-        </li>
-      <!-- ELSE -->
-        <li>
-          <button  title="{L_OWN_PRODUCT}" name="owned" class="button icon-button add-icon have"><span>{L_FAV_POST}</span></button>
-        </li>
+      <!-- IF product.U_OWNERSHIP -->
+        <!-- IF product.U_OWN == false -->
+          <li>
+            <button  title="{L_OWN_PRODUCT}" name="owned" class="button icon-button add-icon"><span>{L_FAV_POST}</span></button>
+          </li>
+        <!-- ELSE -->
+          <li>
+            <button  title="{L_OWN_PRODUCT}" name="owned" class="button icon-button add-icon have"><span>{L_FAV_POST}</span></button>
+          </li>
+        <!-- ENDIF -->
       <!-- ENDIF -->
       <!-- IF product.U_REPORT -->
         <!-- <li>

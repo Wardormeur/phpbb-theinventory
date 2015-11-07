@@ -12,6 +12,7 @@ class abstract_controller{
     \phpbb\controller\helper $helper,
     \phpbb\template\template $template,
     \phpbb\user $user,
+    \phpbb\auth\auth $auth,
     \phpbb\request\request $request,
     $phpEx,
     $phpbb_root_path,
@@ -19,7 +20,7 @@ class abstract_controller{
 		\wardormeur\theinventory\service\gen_model $gen_model,
 		\wardormeur\theinventory\service\parent_model $parent_model,
 		\wardormeur\theinventory\service\ownership $ownership,
-    \wardormeur\theinventory\mapper\user $extuser //shouldnt expose this one here, but w/e
+    \wardormeur\theinventory\mapper\user $extuser //shouldnt expose this one here, but w/e,
   ){
     $this->config = $config;
 		$this->helper = $helper;
@@ -33,6 +34,7 @@ class abstract_controller{
 		$this->parent_model = $parent_model;
     $this->ownership = $ownership;
     $this->extuser = $extuser;
+    $this->auth = $auth;
   }
 
 

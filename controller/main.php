@@ -37,8 +37,8 @@ class main extends abstract_controller
 
     $this->template->assign_vars(
       array(
-        'U_NEW' => $this->helper->route('wardormeur_theinventory_savenewproduct'),
-        'U_NEW_BRAND' => $this->helper->route('wardormeur_theinventory_savenewbrand')
+        'U_NEW' => $this->auth->acl_get('u_ti_create') ? $this->helper->route('wardormeur_theinventory_savenewproduct') : false,
+        'U_NEW_BRAND' => $this->auth->acl_get('u_ti_create') ? $this->helper->route('wardormeur_theinventory_savenewbrand') : false
       )
     );
 
@@ -54,7 +54,6 @@ class main extends abstract_controller
 														array('name'=>$brand->get_name())
 													);
 				$product['brand'] = $brand->get_name();
-        var_dump($product);
 	      $this->template->assign_block_vars(
 	        'product'	,	$product
 	      );
