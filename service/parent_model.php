@@ -44,7 +44,6 @@ class parent_model
 		}
 		if (empty($file->filename))
 		{
-			var_dump('sdsd'.$file->filename);
 		}else{
 			$file->move_file($upload_dir, true);
 			$values['image_path'] = $file->uploadname;

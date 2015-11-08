@@ -103,7 +103,6 @@ class product extends abstract_controller
 						'product.property', $display_properties
 					);
 				}
-				// var_dump($display_properties);
 			}
 
 		}

@@ -89,7 +89,6 @@ class gen_model{
           },
           $fields
         ));
-        var_dump($deleted_keys);
         foreach($fields as $property){
           $local_id = $property->get_local_id();
           if($local_id != null){
