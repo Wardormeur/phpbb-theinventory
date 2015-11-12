@@ -27,21 +27,21 @@ class main_module
 		$this->page_title = $user->lang('ACP_TI_TITLE');
 		add_form_key('theinventory');
 
-		if ($request->is_set_post('submit'))
-		{
-			if (!check_form_key('theinventory'))
-			{
-				trigger_error('FORM_INVALID');
-			}
-			$this->config->set('ti_slave_path',$this->request->variable('slave_path',''));
-			$this->config->set('ti_mode',$this->request->variable('mode',0));
-
-
-			trigger_error($user->lang('ACP_TI_SETTING_SAVED') . adm_back_link($this->u_action));
-		}
-
-		$template->assign_vars(array(
-			'U_ACTION'				=> $this->u_action,
-		));
+		// if ($request->is_set_post('submit'))
+		// {
+		// 	if (!check_form_key('theinventory'))
+		// 	{
+		// 		trigger_error('FORM_INVALID');
+		// 	}
+		// 	$this->config->set('ti_slave_path',$this->request->variable('slave_path',''));
+		// 	$this->config->set('ti_mode',$this->request->variable('mode',0));
+		//
+		//
+		// 	trigger_error($user->lang('ACP_TI_SETTING_SAVED') . adm_back_link($this->u_action));
+		// }
+		//
+		// $template->assign_vars(array(
+		// 	'U_ACTION'				=> $this->u_action,
+		// ));
 	}
 }

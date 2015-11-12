@@ -20,6 +20,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_TI_TITLE'			=> 'TheInventory Module',
 	'ACP_TI'					=> 'Settings',
+	'EMPTY'						=> 'Nothing here, yet?',
 	'ACP_TI_SETTING_SAVED'	=> 'Settings have been saved successfully!',
 	'ACL_A_TI_CREATE' => 'Can create products & brands',
 	'ACL_A_TI_EDIT' => 'Can edit products & brands',
