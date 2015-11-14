@@ -81,7 +81,7 @@ public function show($name)
 		}else
 		{
 			if($fast_redir){
-				redirect($this->helper->route('wardormeur_theinventory_main', array('brand_id'=>$added->get_name())));
+				redirect($this->helper->route('wardormeur_theinventory_main', array('brand_id'=>$added->get_local_id())));
 			}else {
 				return $this->helper->render('edit_brand_body.html', $added->get_name()); //??scenario
 			}

@@ -32,7 +32,7 @@ class product extends abstract_controller
 					'U_NEW' => $this->auth->acl_get('u_ti_create') ? $this->helper->route('wardormeur_theinventory_newproduct') : false,
 					'U_EDIT' => $this->auth->acl_get('u_ti_edit') ? $this->helper->route('wardormeur_theinventory_editproduct', array('name'=>$product->get_name())) : false,
 					'U_DELETE' => $this->auth->acl_get('u_ti_remove') ? $this->helper->route('wardormeur_theinventory_removeproduct',array('name'=>$product->get_name())) : false,
-					'U_SEARCH_BRAND' => $this->helper->route('wardormeur_theinventory_main',array('brand'=>$brand->get_name())),
+					'U_SEARCH_BRAND' => $this->helper->route('wardormeur_theinventory_main',array('brand_id'=>$brand->get_local_id())),
 					'U_OWN' => $ownership
 					// 'U_WARN_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct'),
 					// 'U_INFO_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct'),
