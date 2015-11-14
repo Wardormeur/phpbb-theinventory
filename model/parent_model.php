@@ -1,7 +1,6 @@
 <?php
 
 namespace wardormeur\theinventory\model;
-include_once 'abstract_model.php';
 
 class parent_model extends abstract_model{
   private $name = '';

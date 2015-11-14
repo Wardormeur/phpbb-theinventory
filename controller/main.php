@@ -8,8 +8,6 @@
 */
 
 namespace wardormeur\theinventory\controller;
-include_once 'abstract_controller.php' ;
-
 
 class main extends abstract_controller
 {

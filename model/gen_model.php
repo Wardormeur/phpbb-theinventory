@@ -1,7 +1,6 @@
 <?php
 namespace wardormeur\theinventory\model;
 use inflector\Inflector;
-include_once 'abstract_model.php';
 
 class gen_model extends abstract_model{
 
