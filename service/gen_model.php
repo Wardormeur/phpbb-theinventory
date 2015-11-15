@@ -21,6 +21,12 @@ class gen_model{
 
 	function save($values){
 		$affected = 0;
+		$exists = isset($values['local_id']);
+		if($exists){
+			$models = $this->get(['local_id'=>$values['local_id']]);
+			$model = $models[0];
+		}
+
 
 		$upload_dir = 'images/product';
 		if (!class_exists('fileupload'))
@@ -36,15 +42,21 @@ class gen_model{
 
 		}
 
-		if(isset($values['img_path']))
+		if(isset($values['img_path']) )
 		{
+			if($exists){
+				$values['image_path'] = $model->get_image_path();
+				if( $values['img_path'] != 	$values['image_path'] ){
+					$file = $upload->remote_upload($values['img_path']);
+				}
+			}
+			else {
 				$file = $upload->remote_upload($values['img_path']);
-
-				// $values['image_path'] = $values['img_path'];
+			}
 		}
-		if (empty($file->filename))
+
+		if (!empty($file->filename))
 		{
-		}else{
 			$file->move_file($upload_dir, true);
 			$values['image_path'] = $file->uploadname;
 		}

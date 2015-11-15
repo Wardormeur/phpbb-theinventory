@@ -79,14 +79,11 @@ class product extends abstract_controller
 	      );
 	    }
 
-			$img_path = $model->get_image_path();
-			$img = sizeof($img_path) > 1 ? $this->helper->route('wardormeur_theinventory_image_product', array('name'=>$img_path)) : '';
-
 			$this->template->assign_block_vars('product',
 				array(
 					'name'=> $model->get_name(),
 					'local_id'=>$model->get_local_id(),
-					'image_path'=>$img,
+					'image_path'=>$model->get_image_path(),
 					'U_EDIT' => $this->helper->route('wardormeur_theinventory_saveproduct',array('name'=>$model->get_name())),
 					'U_NEW_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct')
 				)
