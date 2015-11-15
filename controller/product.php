@@ -22,16 +22,16 @@ class product extends abstract_controller
 			$brand = $brands[0];
 			$img_path = $product->get_image_path();
 			$ownership =  $this->ownership->is_user_owning( $this->user->data['user_id'], $product->get_local_id());
-			$img = sizeof($img_path)> 1 ? $this->helper->route('wardormeur_theinventory_image_product', array('name'=>$img_path)) : '';
+			$img = strlen($img_path)> 1 ? $this->helper->route('wardormeur_theinventory_image_product', array('name'=>$img_path)) : '';
 				$this->template->assign_block_vars('product',
 				array(
 					'name'=> $product->get_name(),
 					'id'=>$product->get_name(),
 					'brand'=> $brand->get_name(),
 					'image'=> $img,
-					'U_NEW' => $this->auth->acl_get('u_ti_create') ? $this->helper->route('wardormeur_theinventory_newproduct') : false,
-					'U_EDIT' => $this->auth->acl_get('u_ti_edit') ? $this->helper->route('wardormeur_theinventory_editproduct', array('name'=>$product->get_name())) : false,
-					'U_DELETE' => $this->auth->acl_get('u_ti_remove') ? $this->helper->route('wardormeur_theinventory_removeproduct',array('name'=>$product->get_name())) : false,
+					'U_NEW' => $this->auth->acl_get('a_ti_create')||$this->auth->acl_get('m_ti_create')||$this->auth->acl_get('u_ti_create') ? $this->helper->route('wardormeur_theinventory_newproduct') : false,
+					'U_EDIT' => $this->auth->acl_get('a_ti_edit')||$this->auth->acl_get('m_ti_edit')||$this->auth->acl_get('u_ti_edit') ? $this->helper->route('wardormeur_theinventory_editproduct', array('name'=>$product->get_name())) : false,
+					'U_DELETE' => $this->auth->acl_get('a_ti_remove')||$this->auth->acl_get('m_ti_remove')||$this->auth->acl_get('u_ti_remove') ? $this->helper->route('wardormeur_theinventory_removeproduct',array('name'=>$product->get_name())) : false,
 					'U_SEARCH_BRAND' => $this->helper->route('wardormeur_theinventory_main',array('brand_id'=>$brand->get_local_id())),
 					'U_OWN' => $ownership
 					// 'U_WARN_PRODUCT' => $this->helper->route('wardormeur_theinventory_newproduct'),

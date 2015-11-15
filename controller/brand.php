@@ -26,9 +26,9 @@ public function show($name)
 					'description'=>$model->get_description(),
 					'url'=>$model->get_url(),
 					'image'=>$model->get_image_path(),
-					'U_NEW' => $this->auth->acl_get('u_ti_create') ? $this->helper->route('wardormeur_theinventory_newbrand') : false,
-					'U_EDIT' => $this->auth->acl_get('u_ti_edit') ? $this->helper->route('wardormeur_theinventory_editbrand',array('name'=>$model->get_name())) : false,
-					'U_DELETE' => $this->auth->acl_get('u_ti_remove') ?$this->helper->route('wardormeur_theinventory_removebrand',array('name'=>$model->get_name())) : false,
+					'U_NEW' => $this->auth->acl_get('a_ti_create')||$this->auth->acl_get('m_ti_create')||$this->auth->acl_get('u_ti_create')  ? $this->helper->route('wardormeur_theinventory_newbrand') : false,
+					'U_EDIT' => $this->auth->acl_get('a_ti_edit')||$this->auth->acl_get('m_ti_edit')||$this->auth->acl_get('u_ti_edit') ? $this->helper->route('wardormeur_theinventory_editbrand',array('name'=>$model->get_name())) : false,
+					'U_DELETE' => $this->auth->acl_get('a_ti_remove')||$this->auth->acl_get('m_ti_remove')||$this->auth->acl_get('u_ti_remove') ?$this->helper->route('wardormeur_theinventory_removebrand',array('name'=>$model->get_name())) : false,
 					// 'U_WARN_brand' => $this->helper->route('wardormeur_theinventory_newbrand'),
 					// 'U_INFO_brand' => $this->helper->route('wardormeur_theinventory_newbrand'),
 					// 'U_QUOTE_brand' => $this->helper->route('wardormeur_theinventory_newbrand')

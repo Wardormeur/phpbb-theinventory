@@ -24,7 +24,7 @@ class main_listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.page_header'						=> 'add_page_header_link',
-
+      'core.permissions'                  => 'permission_ti',
 			/*User display*/
 			'core.memberlist_view_profile' => 'get_user_relationships',
 			'core.viewtopic_modify_post_row' => 'get_users_relationships',
@@ -82,6 +82,24 @@ class main_listener implements EventSubscriberInterface
 			'U_PRODUCT_PAGE'	=> $this->helper->route('wardormeur_theinventory_main')
 			)
 		);
+	}
+
+	public function permission_ti($event)
+	{
+		$permissions = $event['permissions'];
+		$permissions['a_ti_create'] = array('lang' => 'ACL_A_TI_CREATE', 'cat' => 'misc');
+		$permissions['a_ti_edit'] = array('lang' => 'ACL_A_TI_EDIT', 'cat' => 'misc');
+		$permissions['a_ti_remove'] = array('lang' => 'ACL_A_TI_REMOVE', 'cat' => 'misc');
+
+		$permissions['m_ti_create'] = array('lang' => 'ACL_M_TI_CREATE', 'cat' => 'misc');
+		$permissions['m_ti_edit'] = array('lang' => 'ACL_M_TI_EDIT', 'cat' => 'misc');
+		$permissions['m_ti_remove'] = array('lang' => 'ACL_M_TI_REMOVE', 'cat' => 'misc');
+
+		$permissions['u_ti_create'] = array('lang' => 'ACL_U_TI_CREATE', 'cat' => 'misc');
+		$permissions['u_ti_edit'] = array('lang' => 'ACL_U_TI_EDIT', 'cat' => 'misc');
+		$permissions['u_ti_remove'] = array('lang' => 'ACL_U_TI_REMOVE', 'cat' => 'misc');
+
+		$event['permissions'] = $permissions;
 	}
 
 		public function get_user_relationships($event)

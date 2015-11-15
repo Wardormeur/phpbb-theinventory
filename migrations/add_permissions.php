@@ -66,6 +66,19 @@ class add_permissions extends \phpbb\db\migration\migration
 			array('permission.remove', array('m_ti_remove')),
 			array('permission.remove', array('u_ti_remove')),
 
+			// Admins
+			array('permission.permission_unset', array('ADMINISTRATORS', 'a_ti_create','group')),
+			array('permission.permission_unset', array('ADMINISTRATORS', 'a_ti_edit','group')),
+			array('permission.permission_unset', array('ADMINISTRATORS', 'a_ti_remove','group')),
+			//Moderators
+			array('permission.permission_unset', array('GLOBAL_MODERATORS', 'm_ti_create','group')),
+			array('permission.permission_unset', array('GLOBAL_MODERATORS', 'm_ti_edit','group')),
+			array('permission.permission_unset', array('GLOBAL_MODERATORS', 'm_ti_remove','group')),
+			// Give REGISTERED users u_new permission
+			array('permission.permission_unset', array('REGISTERED', 'u_ti_create','group')),
+			array('permission.permission_unset', array('REGISTERED', 'u_ti_edit','group')),
+			array('permission.permission_unset', array('REGISTERED', 'u_ti_remove', 'group'))
+
 		));
 	}
 
