@@ -54,9 +54,9 @@ class add_permissions extends \phpbb\db\migration\migration
 	{
 		return(array(
 
-			array('permission.add', array('a_ti_create')),
-			array('permission.add', array('m_ti_create')),
-			array('permission.add', array('u_ti_create')),
+			array('permission.remove', array('a_ti_create')),
+			array('permission.remove', array('m_ti_create')),
+			array('permission.remove', array('u_ti_create')),
 
 			array('permission.remove', array('a_ti_edit')),
 			array('permission.remove', array('m_ti_edit')),
