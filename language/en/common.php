@@ -34,6 +34,8 @@ $lang = array_merge($lang, array(
 	'ACL_U_TI_CREATE' => 'Can create products & brands',
 	'ACL_U_TI_EDIT' => 'Can edit products & brands',
 	'ACL_U_TI_REMOVE' => 'Can remove products & brands',
+
+	'ACL_U_TI_OWN' => 'Can own products',
 	'PRODUCT_PAGE'	=> 'Product page',
 	// Buttons
 	'PRODUCT_SEARCH'	=>	'Search a product',

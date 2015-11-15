@@ -34,6 +34,7 @@ class add_permissions extends \phpbb\db\migration\migration
 			array('permission.add', array('m_ti_remove')),
 			array('permission.add', array('u_ti_remove')),
 
+			array('permission.add', array('u_ti_own')),
 			// Set default permissions
 			// Admins
 			array('permission.permission_set', array('ADMINISTRATORS', 'a_ti_create','group')),
@@ -46,7 +47,9 @@ class add_permissions extends \phpbb\db\migration\migration
 			// Give REGISTERED users u_new permission
 			array('permission.permission_set', array('REGISTERED', 'u_ti_create','group')),
 			array('permission.permission_set', array('REGISTERED', 'u_ti_edit','group')),
-			array('permission.permission_set', array('REGISTERED', 'u_ti_remove', 'group', false))
+			array('permission.permission_set', array('REGISTERED', 'u_ti_remove', 'group', false)),
+
+			array('permission.permission_set', array('REGISTERED', 'u_ti_own', 'group'))
 		));
 	}
 
@@ -66,6 +69,7 @@ class add_permissions extends \phpbb\db\migration\migration
 			array('permission.remove', array('m_ti_remove')),
 			array('permission.remove', array('u_ti_remove')),
 
+			array('permission.remove', array('u_ti_own')),
 			// Admins
 			array('permission.permission_unset', array('ADMINISTRATORS', 'a_ti_create','group')),
 			array('permission.permission_unset', array('ADMINISTRATORS', 'a_ti_edit','group')),
@@ -77,8 +81,9 @@ class add_permissions extends \phpbb\db\migration\migration
 			// Give REGISTERED users u_new permission
 			array('permission.permission_unset', array('REGISTERED', 'u_ti_create','group')),
 			array('permission.permission_unset', array('REGISTERED', 'u_ti_edit','group')),
-			array('permission.permission_unset', array('REGISTERED', 'u_ti_remove', 'group'))
+			array('permission.permission_unset', array('REGISTERED', 'u_ti_remove', 'group')),
 
+			array('permission.permission_unset', array('REGISTERED', 'u_ti_own', 'group'))
 		));
 	}
 

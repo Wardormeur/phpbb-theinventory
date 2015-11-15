@@ -99,6 +99,7 @@ class main_listener implements EventSubscriberInterface
 		$permissions['u_ti_edit'] = array('lang' => 'ACL_U_TI_EDIT', 'cat' => 'misc');
 		$permissions['u_ti_remove'] = array('lang' => 'ACL_U_TI_REMOVE', 'cat' => 'misc');
 
+		$permissions['u_ti_own'] = array('lang' => 'ACL_U_TI_OWN', 'cat' => 'misc');
 		$event['permissions'] = $permissions;
 	}
 
