@@ -62,7 +62,7 @@ class gen_model{
 		}
 
 		$model = new \wardormeur\theinventory\model\gen_model($values);
-		if(isset($values['local_id'])){
+		if($exists){
 			$affected = $this->mapper->update($model);
 		}else{
 			$affected = $this->mapper->insert($model);

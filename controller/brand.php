@@ -19,13 +19,14 @@ public function show($name)
 		{
 			$models = $this->parent_model->get(['name'=>$name]);
 			$model = $models[0];
+			$img = strlen($model->get_image_path())> 1 ? $this->helper->route('wardormeur_theinventory_image_brand', array('name'=>$model->get_image_path())) : '';
 			$this->template->assign_block_vars('brand',
 				array(
 					'name'=> $model->get_name(),
 					'local_id'=>$model->get_local_id(),
 					'description'=>$model->get_description(),
 					'url'=>$model->get_url(),
-					'image'=>$model->get_image_path(),
+					'image'=>$img,
 					'U_NEW' => $this->auth->acl_get('a_ti_create')||$this->auth->acl_get('m_ti_create')||$this->auth->acl_get('u_ti_create')  ? $this->helper->route('wardormeur_theinventory_newbrand') : false,
 					'U_EDIT' => $this->auth->acl_get('a_ti_edit')||$this->auth->acl_get('m_ti_edit')||$this->auth->acl_get('u_ti_edit') ? $this->helper->route('wardormeur_theinventory_editbrand',array('name'=>$model->get_name())) : false,
 					'U_DELETE' => $this->auth->acl_get('a_ti_remove')||$this->auth->acl_get('m_ti_remove')||$this->auth->acl_get('u_ti_remove') ?$this->helper->route('wardormeur_theinventory_removebrand',array('name'=>$model->get_name())) : false,
@@ -46,11 +47,14 @@ public function show($name)
 		{
 			$models = $this->parent_model->get(['name'=>$name]);
 			$model = $models[0];
+			$img = strlen($model->get_image_path())> 1 ? $this->helper->route('wardormeur_theinventory_image_brand', array('name'=>$model->get_image_path())) : '';
+
 			$this->template->assign_block_vars('brand',
 				array(
 					'name'=> $model->get_name(),
 					'local_id'=>$model->get_local_id(),
-					'image'=>$this->helper->route('wardormeur_theinventory_image_brand', array('name'=>$model->get_image_path())),
+					'image'=>$img,
+					'image_path'=>$model->get_image_path(),
 					'url'=>$model->get_url(),
 					'description'=>$model->get_description(),
 					'U_EDIT' => $this->helper->route('wardormeur_theinventory_savebrand',array('name'=>$model->get_name())),
