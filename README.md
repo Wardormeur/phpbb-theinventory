@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Wardormeur/phpbb-theinventory.png?label=ready&title=Ready)](https://waffle.io/Wardormeur/phpbb-theinventory)
 Extension to enable the creation of products, through service theInventory.net
 
 Extension (may?) be used thourh Lorenzo/nickvergessen gallery to stock image locally ?
